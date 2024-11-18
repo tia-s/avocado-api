@@ -12,7 +12,7 @@ import java.util.Optional;
 
 
 @RestController
-@RequestMapping("/api/avocados")
+@RequestMapping("/api/rest")
 public class AvocadoRestApi {
 
     private final AvocadoSaleService avocadoSaleService;

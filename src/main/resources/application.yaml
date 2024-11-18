@@ -1,6 +1,12 @@
+server:
+  port: 8080
 spring:
   application:
     name: avocado-api
+  graphql:
+    path: /api/graphql
+    graphiql:
+      enabled: true
   datasource:
     url: jdbc:postgresql://localhost:5432/tiashackinterface
     username: ${DB_USERNAME}

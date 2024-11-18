@@ -162,6 +162,28 @@ public class AvocadoSale {
         this.region = region;
     }
 
+    public AvocadoSale() {}
+
+    public AvocadoSale(Long id, String date, double averagePrice, double totalVolume,
+                       double plu4046, double plu4225, double plu4770, double totalBags,
+                       double smallBags, double largeBags, double xLargeBags, String type,
+                       Long year, String region) {
+        this.id = id;
+        this.date = date;
+        this.averagePrice = averagePrice;
+        this.totalVolume = totalVolume;
+        this.plu4046 = plu4046;
+        this.plu4225 = plu4225;
+        this.plu4770 = plu4770;
+        this.totalBags = totalBags;
+        this.smallBags = smallBags;
+        this.largeBags = largeBags;
+        this.xLargeBags = xLargeBags;
+        this.type = type;
+        this.year = year;
+        this.region = region;
+    }
+
     @Override
     public String toString() {
         return "AvocadoSale{" +
