@@ -18,7 +18,7 @@ public class AvocadoSoapApiConfig {
 
     @Bean
     public ServletRegistrationBean<CXFServlet> cxfServlet() {
-        return new ServletRegistrationBean<>(new CXFServlet(), "/ws/*");
+        return new ServletRegistrationBean<>(new CXFServlet(), "/*");
     }
 
     @Bean(name = Bus.DEFAULT_BUS_ID)
@@ -29,7 +29,7 @@ public class AvocadoSoapApiConfig {
     @Bean
     public Endpoint endpoint() {
         EndpointImpl endpoint = new EndpointImpl(springBus(), new AvocadoSoapApi(this.avocadoSaleService));
-        endpoint.publish("/api/soap");
+        endpoint.publish("/soap");
         return endpoint;
     }
 

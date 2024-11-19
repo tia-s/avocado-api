@@ -34,8 +34,30 @@ public class AvocadoSaleService {
     }
 
     public AvocadoSale updateAvocadoSale(Long id, AvocadoSale avocadoSale) {
-        avocadoSale.setId(id);
-        return avocadoSaleRepository.save(avocadoSale);
+        Optional<AvocadoSale> existingSaleOpt = avocadoSaleRepository.findById(id);
+
+        if (existingSaleOpt.isPresent()) {
+            AvocadoSale existingSale = existingSaleOpt.get();
+
+            // Update the fields of the existing AvocadoSale with the new values
+            existingSale.setDate(avocadoSale.getDate());
+            existingSale.setAveragePrice(avocadoSale.getAveragePrice());
+            existingSale.setTotalVolume(avocadoSale.getTotalVolume());
+            existingSale.setPlu4046(avocadoSale.getPlu4046());
+            existingSale.setPlu4225(avocadoSale.getPlu4225());
+            existingSale.setPlu4770(avocadoSale.getPlu4770());
+            existingSale.setTotalBags(avocadoSale.getTotalBags());
+            existingSale.setSmallBags(avocadoSale.getSmallBags());
+            existingSale.setLargeBags(avocadoSale.getLargeBags());
+            existingSale.setXLargeBags(avocadoSale.getXLargeBags());
+            existingSale.setType(avocadoSale.getType());
+            existingSale.setYear(avocadoSale.getYear());
+            existingSale.setRegion(avocadoSale.getRegion());
+
+            return avocadoSaleRepository.save(existingSale);
+        } else {
+            return null;
+        }
     }
 
     public void deleteAvocadoSale(Long id) {
