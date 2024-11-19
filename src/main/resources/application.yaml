@@ -6,7 +6,7 @@ spring:
   application:
     name: avocado-api
   graphql:
-    path: /api/graphql
+    path: /graphql
     graphiql:
       enabled: true
 
