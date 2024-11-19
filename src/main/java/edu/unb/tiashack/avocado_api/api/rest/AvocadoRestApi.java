@@ -39,7 +39,7 @@ public class AvocadoRestApi {
     // Retrieve avocado sales records within a specified price range
     @GetMapping("/price-range")
     public List<AvocadoSale> getAvocadoSalesByPriceRange(@RequestParam double minPrice,
-                                                         @RequestParam double maxPrice) {
+                                                             @RequestParam double maxPrice) {
         return avocadoSaleService.getSalesWithinPriceRange(minPrice, maxPrice);
     }
 
@@ -53,7 +53,7 @@ public class AvocadoRestApi {
     // Update an existing avocado sales record
     @PutMapping("/{id}")
     public ResponseEntity<AvocadoSale> updateAvocadoSale(@PathVariable Long id,
-                                                         @RequestBody AvocadoSale avocadoSale) {
+                                                             @RequestBody AvocadoSale avocadoSale) {
         AvocadoSale updatedAvocadoSale = avocadoSaleService.updateAvocadoSale(id, avocadoSale);
         return ResponseEntity.ok(updatedAvocadoSale);
     }

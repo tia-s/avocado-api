@@ -8,7 +8,7 @@ import org.apache.cxf.jaxws.EndpointImpl;
 import org.apache.cxf.Bus;
 import org.apache.cxf.bus.spring.SpringBus;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "edu.unb.tiashack.avocado_api")
 public class AvocadoApiApplication {
 
 	public static void main(String[] args) {
