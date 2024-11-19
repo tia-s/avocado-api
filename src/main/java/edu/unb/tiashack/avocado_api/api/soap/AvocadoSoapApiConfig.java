@@ -1,5 +1,6 @@
 package edu.unb.tiashack.avocado_api.api.soap;
 
+import edu.unb.tiashack.avocado_api.service.AvocadoSaleService;
 import jakarta.xml.ws.Endpoint;
 import org.apache.cxf.Bus;
 import org.apache.cxf.bus.spring.SpringBus;
@@ -11,6 +12,10 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class AvocadoSoapApiConfig {
+    private final AvocadoSaleService avocadoSaleService;
+
+    public AvocadoSoapApiConfig(AvocadoSaleService avocadoSaleService) {this.avocadoSaleService = avocadoSaleService;}
+
     @Bean
     public ServletRegistrationBean<CXFServlet> cxfServlet() {
         return new ServletRegistrationBean<>(new CXFServlet(), "/ws/*");
@@ -23,7 +28,7 @@ public class AvocadoSoapApiConfig {
 
     @Bean
     public Endpoint endpoint() {
-        EndpointImpl endpoint = new EndpointImpl(springBus(), new HelloServiceImpl());
+        EndpointImpl endpoint = new EndpointImpl(springBus(), new AvocadoSoapApi(this.avocadoSaleService));
         endpoint.publish("/api/soap");
         return endpoint;
     }
