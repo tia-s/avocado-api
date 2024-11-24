@@ -9,10 +9,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Map;
 
 
 @RestController
-@RequestMapping("/api/rest")
+@RequestMapping("/rest")
 public class AvocadoRestApi {
 
     private final AvocadoSaleService avocadoSaleService;
@@ -36,11 +37,23 @@ public class AvocadoRestApi {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    // Retrieve avocado sales records within a specified price range
+    // Retrieve avocado sales records by type
+    @GetMapping("/type/{type}")
+    public ResponseEntity<List<AvocadoSale>> getAvocadoSalesByType(@PathVariable String type) {
+        List<AvocadoSale> avocadoSales = avocadoSaleService.getAvocadoSalesByType(type);
+        return avocadoSales.isEmpty()
+                ? ResponseEntity.noContent().build()
+                : ResponseEntity.ok(avocadoSales);
+    }
+
     @GetMapping("/price-range")
-    public List<AvocadoSale> getAvocadoSalesByPriceRange(@RequestParam double minPrice,
-                                                             @RequestParam double maxPrice) {
-        return avocadoSaleService.getSalesWithinPriceRange(minPrice, maxPrice);
+    public ResponseEntity<List<AvocadoSale>> getAvocadoSalesByPriceRange(
+            @RequestParam double minPrice,
+            @RequestParam double maxPrice) {
+        List<AvocadoSale> avocadoSales = avocadoSaleService.getAvocadoSalesWithinPriceRange(minPrice, maxPrice);
+        return avocadoSales.isEmpty()
+                ? ResponseEntity.noContent().build()
+                : ResponseEntity.ok(avocadoSales);
     }
 
     // Create a new avocado sales record
@@ -50,12 +63,35 @@ public class AvocadoRestApi {
         return new ResponseEntity<>(createdAvocadoSale, HttpStatus.CREATED);
     }
 
-    // Update an existing avocado sales record
+    // Update an existing avocado sales record by ID
     @PutMapping("/{id}")
-    public ResponseEntity<AvocadoSale> updateAvocadoSale(@PathVariable Long id,
-                                                             @RequestBody AvocadoSale avocadoSale) {
-        AvocadoSale updatedAvocadoSale = avocadoSaleService.updateAvocadoSale(id, avocadoSale);
-        return ResponseEntity.ok(updatedAvocadoSale);
+    public ResponseEntity<AvocadoSale> updateAvocadoSale(@PathVariable Long id, @RequestBody Map<String, Object> updates) {
+        try {
+            AvocadoSale updatedAvocadoSale = avocadoSaleService.updateAvocadoSale(id, updates);
+
+            if (updatedAvocadoSale != null) {
+                // Return the updated avocado sale with a 200 OK status
+                return ResponseEntity.ok(updatedAvocadoSale);
+            } else {
+                // Return a 404 Not Found if the avocado sale with the given ID does not exist
+                return ResponseEntity.notFound().build();
+            }
+        } catch (IllegalArgumentException e) {
+            // Return a 400 Bad Request for invalid input
+            return ResponseEntity.badRequest().body(null);
+        }
+    }
+
+    // Calculate average price by region
+    @GetMapping("/average-price-by-region")
+    public ResponseEntity<List<Object[]>> getAveragePriceByRegion() {
+        List<Object[]> averagePriceByRegion = avocadoSaleService.calculateAveragePriceByRegion();
+
+        if (averagePriceByRegion != null && !averagePriceByRegion.isEmpty()) {
+            return ResponseEntity.ok(averagePriceByRegion);
+        } else {
+            return ResponseEntity.noContent().build();  // 204 No Content if no results
+        }
     }
 
     // Delete an existing avocado sales record by ID

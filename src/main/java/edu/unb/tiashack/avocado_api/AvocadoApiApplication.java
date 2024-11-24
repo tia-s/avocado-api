@@ -9,7 +9,6 @@ public class AvocadoApiApplication {
 	public static void main(String[] args) {
 		System.out.println("Running APIs...");
 		SpringApplication.run(AvocadoApiApplication.class, args);
-
 	}
 
 
