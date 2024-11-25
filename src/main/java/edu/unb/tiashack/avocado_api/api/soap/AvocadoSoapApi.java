@@ -1,6 +1,7 @@
 package edu.unb.tiashack.avocado_api.api.soap;
 
 import edu.unb.tiashack.avocado_api.model.AvocadoSale;
+import edu.unb.tiashack.avocado_api.model.RegionAveragePrice;
 import jakarta.jws.WebService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @WebService(endpointInterface = "edu.unb.tiashack.avocado_api.api.soap.AvocadoSoapApiInterface")
@@ -44,18 +46,23 @@ public class AvocadoSoapApi implements AvocadoSoapApiInterface {
         return avocadoSaleService.getAvocadoSalesWithinPriceRange(minPrice, maxPrice);
     }
 
-//    @Override
-//    public AvocadoSale createAvocadoSale(AvocadoSale avocadoSale) {
-//        return avocadoSaleService.createAvocadoSale(avocadoSale);
-//    }
-//
-//    @Override
-//    public AvocadoSale updateAvocadoSale(Long id, AvocadoSale avocadoSale) {
-//        return avocadoSaleService.updateAvocadoSale(id, avocadoSale);
-//    }
-//
-//    @Override
-//    public void deleteAvocadoSale(Long id) {
-//        avocadoSaleService.deleteAvocadoSale(id);
-//    }
+    @Override
+    public AvocadoSale createAvocadoSale(AvocadoSale avocadoSale) {
+        return avocadoSaleService.createAvocadoSale(avocadoSale);
+    }
+
+    @Override
+    public AvocadoSale updateAvocadoSale(Long id, Map<String, Object> updates) {
+        return avocadoSaleService.updateAvocadoSale(id, updates);
+    }
+
+    @Override
+    public List<RegionAveragePrice> calculateAveragePriceByRegion(){
+        return avocadoSaleService.calculateAveragePriceByRegion();
+    }
+
+    @Override
+    public void deleteAvocadoSale(Long id) {
+        avocadoSaleService.deleteAvocadoSale(id);
+    }
 }

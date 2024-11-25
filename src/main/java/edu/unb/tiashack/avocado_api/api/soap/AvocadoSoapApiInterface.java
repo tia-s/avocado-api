@@ -1,5 +1,6 @@
 package edu.unb.tiashack.avocado_api.api.soap;
 
+import edu.unb.tiashack.avocado_api.model.RegionAveragePrice;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebService;
 import jakarta.jws.WebParam;
@@ -25,12 +26,15 @@ public interface AvocadoSoapApiInterface {
     @WebMethod
     List<AvocadoSale> getAvocadoSalesByPriceRange(@WebParam(name="minPrice") double minPrice, @WebParam(name="maxPrice") double maxPrice);
 
-//    @WebMethod
-//    AvocadoSale createAvocadoSale(@WebParam(name="avocadoSale") AvocadoSale avocadoSale);
-//
-//    @WebMethod
-//    AvocadoSale updateAvocadoSale(@WebParam(name="id") Long id, @WebParam(name="updates") Map<String, Object> updates);
-//
-//    @WebMethod
-//    void deleteAvocadoSale(@WebParam(name="id") Long id);
+    @WebMethod
+    AvocadoSale createAvocadoSale(@WebParam(name="avocadoSale") AvocadoSale avocadoSale);
+
+    @WebMethod
+    AvocadoSale updateAvocadoSale(@WebParam(name="id") Long id, @WebParam(name="updates") Map<String, Object> updates);
+
+    @WebMethod
+    List<RegionAveragePrice> calculateAveragePriceByRegion();
+
+    @WebMethod
+    void deleteAvocadoSale(@WebParam(name="id") Long id);
 }

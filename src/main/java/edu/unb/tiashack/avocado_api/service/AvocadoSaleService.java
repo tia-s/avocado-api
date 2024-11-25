@@ -47,7 +47,6 @@ public class AvocadoSaleService {
         if (existingSaleOpt.isPresent()) {
             AvocadoSale existingSale = existingSaleOpt.get();
 
-            // Iterate over the map and update the corresponding fields
             updates.forEach((key, value) -> {
                 switch (key) {
                     case "date":
@@ -148,7 +147,7 @@ public class AvocadoSaleService {
 
             return avocadoSaleRepository.save(existingSale);
         } else {
-            return null; // Return null if the sale with the given id doesn't exist
+            return null;
         }
     }
 
