@@ -466,7 +466,7 @@
 					"response": []
 				},
 				{
-					"name": "Retrieve Avocado Sales Data By ID",
+					"name": "Retrieve Avocado Sale By ID",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -501,7 +501,7 @@
 					"response": []
 				},
 				{
-					"name": "Retrieve Avocado Sales Data By Type",
+					"name": "Retrieve Avocado Sales By Type",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -536,7 +536,7 @@
 					"response": []
 				},
 				{
-					"name": "Retrieve Avocado Sales Data In Price Range",
+					"name": "Retrieve Avocado Sales In Price Range",
 					"request": {
 						"method": "POST",
 						"header": [
