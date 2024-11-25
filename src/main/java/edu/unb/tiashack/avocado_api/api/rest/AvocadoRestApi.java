@@ -83,22 +83,22 @@ public class AvocadoRestApi {
     }
 
     // Calculate average price by region
-    @GetMapping("/average-price-by-region")
-    public ResponseEntity<List<Object[]>> getAveragePriceByRegion() {
-        List<Object[]> averagePriceByRegion = avocadoSaleService.calculateAveragePriceByRegion();
+//    @GetMapping("/average-price-by-region")
+//    public ResponseEntity<List<Object[]>> getAveragePriceByRegion() {
+//        List<Map<String, Object>> averagePriceByRegion = avocadoSaleService.calculateAveragePriceByRegion();
+//
+//        if (averagePriceByRegion != null && !averagePriceByRegion.isEmpty()) {
+//            return ResponseEntity.ok(averagePriceByRegion);
+//        } else {
+//            return ResponseEntity.noContent().build();  // 204 No Content if no results
+//        }
+//    }
 
-        if (averagePriceByRegion != null && !averagePriceByRegion.isEmpty()) {
-            return ResponseEntity.ok(averagePriceByRegion);
-        } else {
-            return ResponseEntity.noContent().build();  // 204 No Content if no results
-        }
-    }
-
-    // Delete an existing avocado sales record by ID
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteAvocadoSale(@PathVariable Long id) {
-        avocadoSaleService.deleteAvocadoSale(id);
-        return ResponseEntity.noContent().build();
-    }
+//    // Delete an existing avocado sales record by ID
+//    @DeleteMapping("/{id}")
+//    public ResponseEntity<boolean> deleteAvocadoSale(@PathVariable Long id) {
+//        avocadoSaleService.deleteAvocadoSale(id);
+//        return ResponseEntity.noContent().build();
+//    }
 }
 

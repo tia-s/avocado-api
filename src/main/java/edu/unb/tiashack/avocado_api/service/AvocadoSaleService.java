@@ -1,13 +1,16 @@
 package edu.unb.tiashack.avocado_api.service;
 
 import edu.unb.tiashack.avocado_api.model.AvocadoSale;
+import edu.unb.tiashack.avocado_api.model.RegionAveragePrice;
 import edu.unb.tiashack.avocado_api.repository.AvocadoSaleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class AvocadoSaleService {
@@ -143,14 +146,13 @@ public class AvocadoSaleService {
                 }
             });
 
-            // Save the updated entity
             return avocadoSaleRepository.save(existingSale);
         } else {
             return null; // Return null if the sale with the given id doesn't exist
         }
     }
 
-    public List<Object[]> calculateAveragePriceByRegion() {
+    public List<RegionAveragePrice> calculateAveragePriceByRegion() {
         return avocadoSaleRepository.calculateAveragePriceByRegion();
     }
 

@@ -15,10 +15,33 @@ type AvocadoSale {
     region: String!
 }
 
+input AvocadoSaleInput {
+    date: String
+    averagePrice: Float
+    totalVolume: Float
+    plu4046: Float
+    plu4225: Float
+    plu4770: Float
+    totalBags: Float
+    smallBags: Float
+    largeBags: Float
+    xLargeBags: Float
+    type: String
+    year: Int
+    region: String
+}
+
+type RegionAveragePrice {
+    region: String
+    averagePrice: Float
+}
+
 type Query {
     getAllAvocadoSales: [AvocadoSale]
     getAvocadoSaleById(id: ID!): AvocadoSale
+    getAvocadoSalesByType(type: String!): [AvocadoSale]
     getAvocadoSalesByPriceRange(minPrice: Float!, maxPrice: Float!): [AvocadoSale]
+    calculateAveragePriceByRegion: [RegionAveragePrice]
 }
 
 type Mutation {
@@ -39,22 +62,6 @@ type Mutation {
         region: String!
     ): AvocadoSale
 
-    updateAvocadoSale(
-        id: ID!
-        date: String!
-        averagePrice: Float!
-        totalVolume: Float!
-        plu4046: Float!
-        plu4225: Float!
-        plu4770: Float!
-        totalBags: Float!
-        smallBags: Float!
-        largeBags: Float!
-        xLargeBags: Float!
-        type: String!
-        year: Int!
-        region: String!
-    ): AvocadoSale
-
+    updateAvocadoSale(id: ID!, updates: AvocadoSaleInput): AvocadoSale
     deleteAvocadoSale(id: ID!): Boolean
 }
