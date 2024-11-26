@@ -6,6 +6,8 @@
       <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
         <collectionProp name="Arguments.arguments"/>
       </elementProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
     </TestPlan>
     <hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="SOAP Thread Group">
@@ -19,6 +21,16 @@
         </elementProp>
       </ThreadGroup>
       <hashTree>
+        <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+          <collectionProp name="Arguments.arguments">
+            <elementProp name="uniqueID" elementType="Argument">
+              <stringProp name="Argument.name">uniqueID</stringProp>
+              <stringProp name="Argument.value">${__intSum(${__threadNum},200000)}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+          </collectionProp>
+        </Arguments>
+        <hashTree/>
         <ResultCollector guiclass="TableVisualizer" testclass="ResultCollector" testname="View Results in Table" enabled="true">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
@@ -93,7 +105,7 @@
           <stringProp name="filename"></stringProp>
         </ResultCollector>
         <hashTree/>
-        <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager">
+        <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
           <collectionProp name="HeaderManager.headers">
             <elementProp name="" elementType="Header">
               <stringProp name="Header.name">Content-Type</stringProp>
@@ -236,7 +248,7 @@
    &lt;soapenv:Body&gt;&#xd;
       &lt;web:createAvocadoSale&gt;&#xd;
          &lt;avocadoSale&gt;&#xd;
-            &lt;id&gt;9999&lt;/id&gt;&#xd;
+            &lt;id&gt;${uniqueID}&lt;/id&gt;&#xd;
             &lt;date&gt;2024-11-19&lt;/date&gt;&#xd;
             &lt;averagePrice&gt;3.50&lt;/averagePrice&gt;&#xd;
             &lt;totalVolume&gt;1000.0&lt;/totalVolume&gt;&#xd;
@@ -281,7 +293,7 @@
    &lt;soapenv:Header/&gt;&#xd;
    &lt;soapenv:Body&gt;&#xd;
       &lt;web:updateAvocadoSale&gt;&#xd;
-        &lt;id&gt;9999&lt;/id&gt;&#xd;
+        &lt;id&gt;${uniqueID}&lt;/id&gt;&#xd;
          &lt;updates&gt;&#xd;
             &lt;entry&gt;&#xd;
                 &lt;key&gt;date&lt;/key&gt;&#xd;
@@ -353,7 +365,7 @@
    &lt;soapenv:Header/&gt;&#xd;
    &lt;soapenv:Body&gt;&#xd;
       &lt;web:deleteAvocadoSale&gt;&#xd;
-        &lt;id&gt;9999&lt;/id&gt;&#xd;
+        &lt;id&gt;${uniqueID}&lt;/id&gt;&#xd;
       &lt;/web:deleteAvocadoSale&gt;&#xd;
    &lt;/soapenv:Body&gt;&#xd;
 &lt;/soapenv:Envelope&gt;&#xd;
@@ -377,6 +389,16 @@
         </elementProp>
       </ThreadGroup>
       <hashTree>
+        <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+          <collectionProp name="Arguments.arguments">
+            <elementProp name="uniqueID" elementType="Argument">
+              <stringProp name="Argument.name">uniqueID</stringProp>
+              <stringProp name="Argument.value">${__intSum(${__threadNum},300000)}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+          </collectionProp>
+        </Arguments>
+        <hashTree/>
         <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
@@ -414,7 +436,7 @@
           <stringProp name="filename"></stringProp>
         </ResultCollector>
         <hashTree/>
-        <ResultCollector guiclass="TableVisualizer" testclass="ResultCollector" testname="View Results in Table">
+        <ResultCollector guiclass="TableVisualizer" testclass="ResultCollector" testname="View Results in Table" enabled="true">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
             <name>saveConfig</name>
@@ -451,7 +473,7 @@
           <stringProp name="filename"></stringProp>
         </ResultCollector>
         <hashTree/>
-        <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager">
+        <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
           <collectionProp name="HeaderManager.headers">
             <elementProp name="" elementType="Header">
               <stringProp name="Header.name">Content-Type</stringProp>
@@ -460,7 +482,7 @@
           </collectionProp>
         </HeaderManager>
         <hashTree/>
-        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Transaction Controller">
+        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Transaction Controller" enabled="true">
           <boolProp name="TransactionController.includeTimers">false</boolProp>
         </TransactionController>
         <hashTree>
@@ -533,7 +555,7 @@
             </elementProp>
           </HTTPSamplerProxy>
           <hashTree/>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GraphQL Retrieve Avocado Sales In Price Range">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GraphQL Retrieve Avocado Sales In Price Range" enabled="true">
             <stringProp name="HTTPSampler.domain">localhost</stringProp>
             <stringProp name="HTTPSampler.port">8080</stringProp>
             <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -570,7 +592,7 @@
                 <elementProp name="" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.value">{&#xd;
-  &quot;query&quot;: &quot;mutation { createAvocadoSale( id: 9998 date: \&quot;2024-11-19\&quot; averagePrice: 3.50 totalVolume: 1000.00 plu4046: 30.4 plu4225: 28.6 plu4770: 51.8 totalBags: 8200.08 smallBags: 500.50 largeBags: 100.00 xLargeBags: 3680.23 type: \&quot;organic\&quot; year: 2024 region: \&quot;California\&quot; ) { id date averagePrice totalVolume plu4046 plu4225 plu4770 totalBags smallBags largeBags xLargeBags type year region } }&quot;&#xd;
+  &quot;query&quot;: &quot;mutation { createAvocadoSale( id: ${userID} date: \&quot;2024-11-19\&quot; averagePrice: 3.50 totalVolume: 1000.00 plu4046: 30.4 plu4225: 28.6 plu4770: 51.8 totalBags: 8200.08 smallBags: 500.50 largeBags: 100.00 xLargeBags: 3680.23 type: \&quot;organic\&quot; year: 2024 region: \&quot;California\&quot; ) { id date averagePrice totalVolume plu4046 plu4225 plu4770 totalBags smallBags largeBags xLargeBags type year region } }&quot;&#xd;
 }&#xd;
 </stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
@@ -593,7 +615,7 @@
                 <elementProp name="" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.value">{&#xd;
-  &quot;query&quot;: &quot;mutation { updateAvocadoSale(id: 9998, updates: {date: \&quot;2024-11-04\&quot;, averagePrice: 22.5, totalVolume: 1500}) { id date averagePrice totalVolume plu4046 plu4225 plu4770 totalBags smallBags largeBags xLargeBags type year region } }&quot;&#xd;
+  &quot;query&quot;: &quot;mutation { updateAvocadoSale(id: ${userID}, updates: {date: \&quot;2024-11-04\&quot;, averagePrice: 22.5, totalVolume: 1500}) { id date averagePrice totalVolume plu4046 plu4225 plu4770 totalBags smallBags largeBags xLargeBags type year region } }&quot;&#xd;
 }&#xd;
 </stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
@@ -602,7 +624,7 @@
             </elementProp>
           </HTTPSamplerProxy>
           <hashTree/>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GraphQL Aggregate Average Price By Region">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GraphQL Aggregate Average Price By Region" enabled="true">
             <stringProp name="HTTPSampler.domain">localhost</stringProp>
             <stringProp name="HTTPSampler.port">8080</stringProp>
             <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -639,7 +661,7 @@
                 <elementProp name="" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.value">{&#xd;
-  &quot;query&quot;: &quot;mutation { deleteAvocadoSale(id: 9998) }&quot;&#xd;
+  &quot;query&quot;: &quot;mutation { deleteAvocadoSale(id: ${userID}) }&quot;&#xd;
 }&#xd;
 </stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
@@ -661,6 +683,16 @@
         </elementProp>
       </ThreadGroup>
       <hashTree>
+        <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+          <collectionProp name="Arguments.arguments">
+            <elementProp name="uniqueID" elementType="Argument">
+              <stringProp name="Argument.name">uniqueID</stringProp>
+              <stringProp name="Argument.value">${__intSum(${__threadNum},9000)}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+          </collectionProp>
+        </Arguments>
+        <hashTree/>
         <ResultCollector guiclass="TableVisualizer" testclass="ResultCollector" testname="View Results in Table" enabled="true">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
@@ -735,7 +767,7 @@
           <stringProp name="filename"></stringProp>
         </ResultCollector>
         <hashTree/>
-        <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager">
+        <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
           <collectionProp name="HeaderManager.headers">
             <elementProp name="" elementType="Header">
               <stringProp name="Header.name">Content-Type</stringProp>
@@ -744,7 +776,7 @@
           </collectionProp>
         </HeaderManager>
         <hashTree/>
-        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Transaction Controller">
+        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Transaction Controller" enabled="true">
           <boolProp name="TransactionController.includeTimers">false</boolProp>
         </TransactionController>
         <hashTree>
@@ -790,7 +822,7 @@
             </elementProp>
           </HTTPSamplerProxy>
           <hashTree/>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="REST Retrieve Avocado Sales In Price Range">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="REST Retrieve Avocado Sales In Price Range" enabled="true">
             <stringProp name="HTTPSampler.domain">localhost</stringProp>
             <stringProp name="HTTPSampler.port">8080</stringProp>
             <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -818,7 +850,7 @@
                 <elementProp name="" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.value">{&#xd;
-    &quot;id&quot;: 9997,&#xd;
+    &quot;id&quot;: ${uniqueID},&#xd;
     &quot;date&quot;: &quot;2024-11-19&quot;,&#xd;
     &quot;averagePrice&quot;: 3.50,&#xd;
     &quot;totalVolume&quot;: 1000.00,&#xd;
@@ -844,7 +876,7 @@
             <stringProp name="HTTPSampler.domain">localhost</stringProp>
             <stringProp name="HTTPSampler.port">8080</stringProp>
             <stringProp name="HTTPSampler.protocol">http</stringProp>
-            <stringProp name="HTTPSampler.path">/api/rest/9997</stringProp>
+            <stringProp name="HTTPSampler.path">/api/rest/${uniqueID}</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
             <stringProp name="HTTPSampler.method">PUT</stringProp>
             <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
@@ -882,7 +914,7 @@
             <stringProp name="HTTPSampler.domain">localhost</stringProp>
             <stringProp name="HTTPSampler.port">8080</stringProp>
             <stringProp name="HTTPSampler.protocol">http</stringProp>
-            <stringProp name="HTTPSampler.path">/api/rest/9997</stringProp>
+            <stringProp name="HTTPSampler.path">/api/rest/${uniqueID}</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
             <stringProp name="HTTPSampler.method">DELETE</stringProp>
             <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
