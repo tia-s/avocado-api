@@ -6,30 +6,29 @@
       <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
         <collectionProp name="Arguments.arguments"/>
       </elementProp>
-      <boolProp name="TestPlan.functional_mode">false</boolProp>
-      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
     </TestPlan>
     <hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="SOAP Thread Group">
-        <intProp name="ThreadGroup.num_threads">2</intProp>
-        <intProp name="ThreadGroup.ramp_time">1</intProp>
+        <intProp name="ThreadGroup.num_threads">50</intProp>
+        <intProp name="ThreadGroup.ramp_time">450</intProp>
+        <longProp name="ThreadGroup.duration">3600</longProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <boolProp name="ThreadGroup.scheduler">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">1</stringProp>
+          <intProp name="LoopController.loops">-1</intProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
-          <collectionProp name="Arguments.arguments">
-            <elementProp name="uniqueID" elementType="Argument">
-              <stringProp name="Argument.name">uniqueID</stringProp>
-              <stringProp name="Argument.value">${__intSum(${__threadNum},200000)}</stringProp>
-              <stringProp name="Argument.metadata">=</stringProp>
-            </elementProp>
-          </collectionProp>
-        </Arguments>
+        <CounterConfig guiclass="CounterConfigGui" testclass="CounterConfig" testname="Counter" enabled="true">
+          <stringProp name="CounterConfig.start">200000</stringProp>
+          <stringProp name="CounterConfig.end"></stringProp>
+          <stringProp name="CounterConfig.incr">1</stringProp>
+          <stringProp name="CounterConfig.name">uniqueID</stringProp>
+          <stringProp name="CounterConfig.format"></stringProp>
+          <boolProp name="CounterConfig.per_user">false</boolProp>
+        </CounterConfig>
         <hashTree/>
         <ResultCollector guiclass="TableVisualizer" testclass="ResultCollector" testname="View Results in Table" enabled="true">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
@@ -68,7 +67,7 @@
           <stringProp name="filename"></stringProp>
         </ResultCollector>
         <hashTree/>
-        <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report">
+        <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
             <name>saveConfig</name>
@@ -114,11 +113,15 @@
           </collectionProp>
         </HeaderManager>
         <hashTree/>
-        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Transaction Controller">
+        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Transaction Controller" enabled="true">
           <boolProp name="TransactionController.includeTimers">false</boolProp>
         </TransactionController>
         <hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="SOAP Retrieve All Avocado Sales">
+          <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Constant Timer" enabled="true">
+            <stringProp name="ConstantTimer.delay">500</stringProp>
+          </ConstantTimer>
+          <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="SOAP Retrieve All Avocado Sales" enabled="true">
             <stringProp name="HTTPSampler.domain">localhost</stringProp>
             <stringProp name="HTTPSampler.port">8080</stringProp>
             <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -144,7 +147,7 @@
             </elementProp>
           </HTTPSamplerProxy>
           <hashTree/>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="SOAP Retrieve Avocado Sale By ID">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="SOAP Retrieve Avocado Sale By ID" enabled="true">
             <stringProp name="HTTPSampler.domain">localhost</stringProp>
             <stringProp name="HTTPSampler.port">8080</stringProp>
             <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -172,7 +175,7 @@
             </elementProp>
           </HTTPSamplerProxy>
           <hashTree/>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="SOAP Retrieve Avocado Sales By Type">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="SOAP Retrieve Avocado Sales By Type" enabled="true">
             <stringProp name="HTTPSampler.domain">localhost</stringProp>
             <stringProp name="HTTPSampler.port">8080</stringProp>
             <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -200,7 +203,7 @@
             </elementProp>
           </HTTPSamplerProxy>
           <hashTree/>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="SOAP Retrieve Avocado Sales In Price Range">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="SOAP Retrieve Avocado Sales In Price Range" enabled="true">
             <stringProp name="HTTPSampler.domain">localhost</stringProp>
             <stringProp name="HTTPSampler.port">8080</stringProp>
             <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -229,7 +232,7 @@
             </elementProp>
           </HTTPSamplerProxy>
           <hashTree/>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="SOAP Create Avocado Sale">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="SOAP Create Avocado Sale" enabled="true">
             <stringProp name="HTTPSampler.domain">localhost</stringProp>
             <stringProp name="HTTPSampler.port">8080</stringProp>
             <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -273,7 +276,7 @@
             </elementProp>
           </HTTPSamplerProxy>
           <hashTree/>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="SOAP Update Avocado Sale">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="SOAP Update Avocado Sale" enabled="true">
             <stringProp name="HTTPSampler.domain">localhost</stringProp>
             <stringProp name="HTTPSampler.port">8080</stringProp>
             <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -318,7 +321,7 @@
             </elementProp>
           </HTTPSamplerProxy>
           <hashTree/>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="SOAP Aggregate Average Price By Region">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="SOAP Aggregate Average Price By Region" enabled="true">
             <stringProp name="HTTPSampler.domain">localhost</stringProp>
             <stringProp name="HTTPSampler.port">8080</stringProp>
             <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -347,7 +350,7 @@
             </elementProp>
           </HTTPSamplerProxy>
           <hashTree/>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="SOAP Delete Avocado Sale">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="SOAP Delete Avocado Sale" enabled="true">
             <stringProp name="HTTPSampler.domain">localhost</stringProp>
             <stringProp name="HTTPSampler.port">8080</stringProp>
             <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -379,27 +382,28 @@
         </hashTree>
       </hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="GraphQL Thread Group">
-        <intProp name="ThreadGroup.num_threads">2</intProp>
-        <intProp name="ThreadGroup.ramp_time">1</intProp>
+        <intProp name="ThreadGroup.num_threads">50</intProp>
+        <intProp name="ThreadGroup.ramp_time">450</intProp>
+        <longProp name="ThreadGroup.duration">3600</longProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <boolProp name="ThreadGroup.scheduler">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">1</stringProp>
+          <intProp name="LoopController.loops">-1</intProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
-          <collectionProp name="Arguments.arguments">
-            <elementProp name="uniqueID" elementType="Argument">
-              <stringProp name="Argument.name">uniqueID</stringProp>
-              <stringProp name="Argument.value">${__intSum(${__threadNum},300000)}</stringProp>
-              <stringProp name="Argument.metadata">=</stringProp>
-            </elementProp>
-          </collectionProp>
-        </Arguments>
+        <CounterConfig guiclass="CounterConfigGui" testclass="CounterConfig" testname="Counter" enabled="true">
+          <stringProp name="CounterConfig.start">300000</stringProp>
+          <stringProp name="CounterConfig.end"></stringProp>
+          <stringProp name="CounterConfig.incr">1</stringProp>
+          <stringProp name="CounterConfig.name">uniqueID</stringProp>
+          <stringProp name="CounterConfig.format"></stringProp>
+          <boolProp name="CounterConfig.per_user">false</boolProp>
+        </CounterConfig>
         <hashTree/>
-        <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report">
+        <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
             <name>saveConfig</name>
@@ -482,11 +486,26 @@
           </collectionProp>
         </HeaderManager>
         <hashTree/>
+        <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+          <collectionProp name="Asserion.test_strings">
+            <stringProp name="72221477">&quot;errors&quot;:</stringProp>
+          </collectionProp>
+          <stringProp name="Assertion.custom_message"></stringProp>
+          <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+          <boolProp name="Assertion.assume_success">false</boolProp>
+          <intProp name="Assertion.test_type">6</intProp>
+          <stringProp name="TestPlan.comments">Detect GraphQL Errors</stringProp>
+        </ResponseAssertion>
+        <hashTree/>
         <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Transaction Controller" enabled="true">
           <boolProp name="TransactionController.includeTimers">false</boolProp>
         </TransactionController>
         <hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GraphQL Retrieve All Avocado Sales">
+          <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Constant Timer" enabled="true">
+            <stringProp name="ConstantTimer.delay">500</stringProp>
+          </ConstantTimer>
+          <hashTree/>
+          <HTTPSamplerProxy guiclass="GraphQLHTTPSamplerGui" testclass="HTTPSamplerProxy" testname="GraphQL Retrieve All Avocado Sales" enabled="true">
             <stringProp name="HTTPSampler.domain">localhost</stringProp>
             <stringProp name="HTTPSampler.port">8080</stringProp>
             <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -497,19 +516,38 @@
             <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
               <collectionProp name="Arguments.arguments">
-                <elementProp name="" elementType="HTTPArgument">
+                <elementProp name="" elementType="HTTPArgument" enabled="true">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.value">{&#xd;
-  &quot;query&quot;: &quot;query { getAllAvocadoSales { id date averagePrice totalVolume plu4046 plu4225 plu4770 totalBags smallBags largeBags xLargeBags type year region } }&quot;&#xd;
-}&#xd;
-</stringProp>
+                  <stringProp name="Argument.value">{&quot;operationName&quot;:null,&quot;query&quot;:&quot;query {\n  getAllAvocadoSales {\n        id\n        date\n        averagePrice\n        totalVolume\n        plu4046\n        plu4225\n        plu4770\n        totalBags\n        smallBags\n        largeBags\n        xLargeBags\n        type\n        year\n        region\n  }\n}&quot;}</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
               </collectionProp>
             </elementProp>
+            <stringProp name="GraphQLHTTPSampler.query">query {
+  getAllAvocadoSales {
+        id
+        date
+        averagePrice
+        totalVolume
+        plu4046
+        plu4225
+        plu4770
+        totalBags
+        smallBags
+        largeBags
+        xLargeBags
+        type
+        year
+        region
+  }
+}
+</stringProp>
+            <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
           </HTTPSamplerProxy>
           <hashTree/>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GraphQL Retrieve Avocado Sale By ID">
+          <HTTPSamplerProxy guiclass="GraphQLHTTPSamplerGui" testclass="HTTPSamplerProxy" testname="GraphQL Retrieve Avocado Sale By ID" enabled="true">
             <stringProp name="HTTPSampler.domain">localhost</stringProp>
             <stringProp name="HTTPSampler.port">8080</stringProp>
             <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -520,19 +558,38 @@
             <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
               <collectionProp name="Arguments.arguments">
-                <elementProp name="" elementType="HTTPArgument">
+                <elementProp name="" elementType="HTTPArgument" enabled="true">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.value">{&#xd;
-  &quot;query&quot;: &quot;query { getAvocadoSaleById(id: 3) { id date averagePrice totalVolume plu4046 plu4225 plu4770 totalBags smallBags largeBags xLargeBags type year region } }&quot;&#xd;
-}&#xd;
-</stringProp>
+                  <stringProp name="Argument.value">{&quot;operationName&quot;:null,&quot;query&quot;:&quot;query {\n  getAvocadoSaleById(id: 3) {\n    id\n    date\n    averagePrice\n    totalVolume\n    plu4046\n    plu4225\n    plu4770\n    totalBags\n    smallBags\n    largeBags\n    xLargeBags\n    type\n    year\n    region\n  }\n}&quot;}</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
               </collectionProp>
             </elementProp>
+            <stringProp name="GraphQLHTTPSampler.query">query {
+  getAvocadoSaleById(id: 3) {
+    id
+    date
+    averagePrice
+    totalVolume
+    plu4046
+    plu4225
+    plu4770
+    totalBags
+    smallBags
+    largeBags
+    xLargeBags
+    type
+    year
+    region
+  }
+}
+</stringProp>
+            <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
           </HTTPSamplerProxy>
           <hashTree/>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GraphQL Retrieve Avocado Sales By Type">
+          <HTTPSamplerProxy guiclass="GraphQLHTTPSamplerGui" testclass="HTTPSamplerProxy" testname="GraphQL Retrieve Avocado Sales By Type" enabled="true">
             <stringProp name="HTTPSampler.domain">localhost</stringProp>
             <stringProp name="HTTPSampler.port">8080</stringProp>
             <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -543,19 +600,37 @@
             <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
               <collectionProp name="Arguments.arguments">
-                <elementProp name="" elementType="HTTPArgument">
+                <elementProp name="" elementType="HTTPArgument" enabled="true">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.value">{&#xd;
-  &quot;query&quot;: &quot;query { getAvocadoSalesByType(type: \&quot;conventional\&quot;) { id date averagePrice totalVolume plu4046 plu4225 plu4770 totalBags smallBags largeBags xLargeBags type year region } }&quot;&#xd;
-}&#xd;
-</stringProp>
+                  <stringProp name="Argument.value">{&quot;operationName&quot;:null,&quot;query&quot;:&quot;query {\n  getAvocadoSalesByType(type: \&quot;conventional\&quot;) {\n    id\n    date\n    averagePrice\n    totalVolume\n    plu4046\n    plu4225\n    plu4770\n    totalBags\n    smallBags\n    largeBags\n    xLargeBags\n    type\n    year\n    region\n  }\n}&quot;}</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
               </collectionProp>
             </elementProp>
+            <stringProp name="GraphQLHTTPSampler.query">query {
+  getAvocadoSalesByType(type: &quot;conventional&quot;) {
+    id
+    date
+    averagePrice
+    totalVolume
+    plu4046
+    plu4225
+    plu4770
+    totalBags
+    smallBags
+    largeBags
+    xLargeBags
+    type
+    year
+    region
+  }
+}</stringProp>
+            <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
           </HTTPSamplerProxy>
           <hashTree/>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GraphQL Retrieve Avocado Sales In Price Range" enabled="true">
+          <HTTPSamplerProxy guiclass="GraphQLHTTPSamplerGui" testclass="HTTPSamplerProxy" testname="GraphQL Retrieve Avocado Sales In Price Range" enabled="true">
             <stringProp name="HTTPSampler.domain">localhost</stringProp>
             <stringProp name="HTTPSampler.port">8080</stringProp>
             <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -566,19 +641,38 @@
             <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
               <collectionProp name="Arguments.arguments">
-                <elementProp name="" elementType="HTTPArgument">
+                <elementProp name="" elementType="HTTPArgument" enabled="true">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.value">{&#xd;
-  &quot;query&quot;: &quot;query { getAvocadoSalesByPriceRange(minPrice: 1.0, maxPrice: 2.5) { id date averagePrice totalVolume plu4046 plu4225 plu4770 totalBags smallBags largeBags xLargeBags type year region } }&quot;&#xd;
-}&#xd;
-</stringProp>
+                  <stringProp name="Argument.value">{&quot;operationName&quot;:null,&quot;query&quot;:&quot;query {\n  getAvocadoSalesByPriceRange(minPrice: 1.0, maxPrice: 2.5) {\n    id\n    date\n    averagePrice\n    totalVolume\n    plu4046\n    plu4225\n    plu4770\n    totalBags\n    smallBags\n    largeBags\n    xLargeBags\n    type\n    year\n    region\n  }\n}&quot;}</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
               </collectionProp>
             </elementProp>
+            <stringProp name="GraphQLHTTPSampler.query">query {
+  getAvocadoSalesByPriceRange(minPrice: 1.0, maxPrice: 2.5) {
+    id
+    date
+    averagePrice
+    totalVolume
+    plu4046
+    plu4225
+    plu4770
+    totalBags
+    smallBags
+    largeBags
+    xLargeBags
+    type
+    year
+    region
+  }
+}
+</stringProp>
+            <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
           </HTTPSamplerProxy>
           <hashTree/>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GraphQL Create Avocado Sale">
+          <HTTPSamplerProxy guiclass="GraphQLHTTPSamplerGui" testclass="HTTPSamplerProxy" testname="GraphQL Create Avocado Sale" enabled="true">
             <stringProp name="HTTPSampler.domain">localhost</stringProp>
             <stringProp name="HTTPSampler.port">8080</stringProp>
             <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -589,19 +683,58 @@
             <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
               <collectionProp name="Arguments.arguments">
-                <elementProp name="" elementType="HTTPArgument">
+                <elementProp name="" elementType="HTTPArgument" enabled="true">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.value">{&#xd;
-  &quot;query&quot;: &quot;mutation { createAvocadoSale( id: ${userID} date: \&quot;2024-11-19\&quot; averagePrice: 3.50 totalVolume: 1000.00 plu4046: 30.4 plu4225: 28.6 plu4770: 51.8 totalBags: 8200.08 smallBags: 500.50 largeBags: 100.00 xLargeBags: 3680.23 type: \&quot;organic\&quot; year: 2024 region: \&quot;California\&quot; ) { id date averagePrice totalVolume plu4046 plu4225 plu4770 totalBags smallBags largeBags xLargeBags type year region } }&quot;&#xd;
-}&#xd;
-</stringProp>
+                  <stringProp name="Argument.value">{&quot;operationName&quot;:null,&quot;variables&quot;:{
+  &quot;uniqueID&quot;: &quot;${uniqueID}&quot;
+},&quot;query&quot;:&quot;mutation($uniqueID: ID!) {\n  createAvocadoSale(\n    id: $uniqueID\n    date: \&quot;2024-11-19\&quot;\n    averagePrice: 3.50\n    totalVolume: 1000.00\n    plu4046: 30.4\n    plu4225: 28.6\n    plu4770: 51.8\n    totalBags: 8200.08\n    smallBags: 500.50\n    largeBags: 100.00\n    xLargeBags: 3680.23\n    type: \&quot;organic\&quot;\n    year: 2024\n    region: \&quot;California\&quot;\n  ) {\n    id\n    date\n    averagePrice\n    totalVolume\n    plu4046\n    plu4225\n    plu4770\n    totalBags\n    smallBags\n    largeBags\n    xLargeBags\n    type\n    year\n    region\n  }\n}&quot;}</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
               </collectionProp>
             </elementProp>
+            <stringProp name="GraphQLHTTPSampler.query">mutation($uniqueID: ID!) {
+  createAvocadoSale(
+    id: $uniqueID
+    date: &quot;2024-11-19&quot;
+    averagePrice: 3.50
+    totalVolume: 1000.00
+    plu4046: 30.4
+    plu4225: 28.6
+    plu4770: 51.8
+    totalBags: 8200.08
+    smallBags: 500.50
+    largeBags: 100.00
+    xLargeBags: 3680.23
+    type: &quot;organic&quot;
+    year: 2024
+    region: &quot;California&quot;
+  ) {
+    id
+    date
+    averagePrice
+    totalVolume
+    plu4046
+    plu4225
+    plu4770
+    totalBags
+    smallBags
+    largeBags
+    xLargeBags
+    type
+    year
+    region
+  }
+}
+</stringProp>
+            <stringProp name="GraphQLHTTPSampler.variables">{
+  &quot;uniqueID&quot;: &quot;${uniqueID}&quot;
+}</stringProp>
+            <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
           </HTTPSamplerProxy>
           <hashTree/>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GraphQL Update Avocado Sale">
+          <HTTPSamplerProxy guiclass="GraphQLHTTPSamplerGui" testclass="HTTPSamplerProxy" testname="GraphQL Update Avocado Sale" enabled="true">
             <stringProp name="HTTPSampler.domain">localhost</stringProp>
             <stringProp name="HTTPSampler.port">8080</stringProp>
             <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -612,19 +745,43 @@
             <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
               <collectionProp name="Arguments.arguments">
-                <elementProp name="" elementType="HTTPArgument">
+                <elementProp name="" elementType="HTTPArgument" enabled="true">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.value">{&#xd;
-  &quot;query&quot;: &quot;mutation { updateAvocadoSale(id: ${userID}, updates: {date: \&quot;2024-11-04\&quot;, averagePrice: 22.5, totalVolume: 1500}) { id date averagePrice totalVolume plu4046 plu4225 plu4770 totalBags smallBags largeBags xLargeBags type year region } }&quot;&#xd;
-}&#xd;
-</stringProp>
+                  <stringProp name="Argument.value">{&quot;operationName&quot;:null,&quot;variables&quot;:{
+  &quot;uniqueID&quot;: &quot;${uniqueID}&quot;
+},&quot;query&quot;:&quot;mutation($uniqueID: ID!) {\n  updateAvocadoSale(id: $uniqueID, updates: {date: \&quot;2024-11-04\&quot;, averagePrice: 22.5, totalVolume: 1500}) {\n    id\n    date\n    averagePrice\n    totalVolume\n    plu4046\n    plu4225\n    plu4770\n    totalBags\n    smallBags\n    largeBags\n    xLargeBags\n    type\n    year\n    region\n  }\n}&quot;}</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
               </collectionProp>
             </elementProp>
+            <stringProp name="GraphQLHTTPSampler.query">mutation($uniqueID: ID!) {
+  updateAvocadoSale(id: $uniqueID, updates: {date: &quot;2024-11-04&quot;, averagePrice: 22.5, totalVolume: 1500}) {
+    id
+    date
+    averagePrice
+    totalVolume
+    plu4046
+    plu4225
+    plu4770
+    totalBags
+    smallBags
+    largeBags
+    xLargeBags
+    type
+    year
+    region
+  }
+}
+</stringProp>
+            <stringProp name="GraphQLHTTPSampler.variables">{
+  &quot;uniqueID&quot;: &quot;${uniqueID}&quot;
+}</stringProp>
+            <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
           </HTTPSamplerProxy>
           <hashTree/>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GraphQL Aggregate Average Price By Region" enabled="true">
+          <HTTPSamplerProxy guiclass="GraphQLHTTPSamplerGui" testclass="HTTPSamplerProxy" testname="GraphQL Aggregate Average Price By Region" enabled="true">
             <stringProp name="HTTPSampler.domain">localhost</stringProp>
             <stringProp name="HTTPSampler.port">8080</stringProp>
             <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -635,19 +792,25 @@
             <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
               <collectionProp name="Arguments.arguments">
-                <elementProp name="" elementType="HTTPArgument">
+                <elementProp name="" elementType="HTTPArgument" enabled="true">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.value">{&#xd;
-  &quot;query&quot;: &quot;query { calculateAveragePriceByRegion { region averagePrice } }&quot;&#xd;
-}&#xd;
-</stringProp>
+                  <stringProp name="Argument.value">{&quot;operationName&quot;:null,&quot;query&quot;:&quot;query {\n  calculateAveragePriceByRegion {\n    region\n    averagePrice\n  }\n}&quot;}</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
               </collectionProp>
             </elementProp>
+            <stringProp name="GraphQLHTTPSampler.query">query {
+  calculateAveragePriceByRegion {
+    region
+    averagePrice
+  }
+}</stringProp>
+            <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
           </HTTPSamplerProxy>
           <hashTree/>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GraphQL Delete Avocado Sale">
+          <HTTPSamplerProxy guiclass="GraphQLHTTPSamplerGui" testclass="HTTPSamplerProxy" testname="GraphQL Delete Avocado Sale" enabled="true">
             <stringProp name="HTTPSampler.domain">localhost</stringProp>
             <stringProp name="HTTPSampler.port">8080</stringProp>
             <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -658,42 +821,54 @@
             <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
               <collectionProp name="Arguments.arguments">
-                <elementProp name="" elementType="HTTPArgument">
+                <elementProp name="" elementType="HTTPArgument" enabled="true">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.value">{&#xd;
-  &quot;query&quot;: &quot;mutation { deleteAvocadoSale(id: ${userID}) }&quot;&#xd;
-}&#xd;
-</stringProp>
+                  <stringProp name="Argument.value">{&quot;operationName&quot;:null,&quot;variables&quot;:{
+  &quot;uniqueID&quot;: &quot;${uniqueID}&quot;
+},&quot;query&quot;:&quot;mutation($uniqueID: ID!) {\n  deleteAvocadoSale(\n    id: $uniqueID\n  ) \n}&quot;}</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
               </collectionProp>
             </elementProp>
+            <stringProp name="GraphQLHTTPSampler.query">mutation($uniqueID: ID!) {
+  deleteAvocadoSale(
+    id: $uniqueID
+  ) 
+}
+</stringProp>
+            <stringProp name="GraphQLHTTPSampler.variables">{
+  &quot;uniqueID&quot;: &quot;${uniqueID}&quot;
+}</stringProp>
+            <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">false</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
           </HTTPSamplerProxy>
           <hashTree/>
         </hashTree>
       </hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="REST Thread Group">
-        <intProp name="ThreadGroup.num_threads">2</intProp>
-        <intProp name="ThreadGroup.ramp_time">1</intProp>
+        <intProp name="ThreadGroup.num_threads">50</intProp>
+        <intProp name="ThreadGroup.ramp_time">450</intProp>
+        <longProp name="ThreadGroup.duration">3600</longProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <boolProp name="ThreadGroup.scheduler">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">1</stringProp>
+          <intProp name="LoopController.loops">-1</intProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
-          <collectionProp name="Arguments.arguments">
-            <elementProp name="uniqueID" elementType="Argument">
-              <stringProp name="Argument.name">uniqueID</stringProp>
-              <stringProp name="Argument.value">${__intSum(${__threadNum},9000)}</stringProp>
-              <stringProp name="Argument.metadata">=</stringProp>
-            </elementProp>
-          </collectionProp>
-        </Arguments>
+        <CounterConfig guiclass="CounterConfigGui" testclass="CounterConfig" testname="Counter" enabled="true">
+          <stringProp name="CounterConfig.start">400000</stringProp>
+          <stringProp name="CounterConfig.end"></stringProp>
+          <stringProp name="CounterConfig.incr">1</stringProp>
+          <stringProp name="CounterConfig.name">uniqueID</stringProp>
+          <stringProp name="CounterConfig.format"></stringProp>
+          <boolProp name="CounterConfig.per_user">false</boolProp>
+        </CounterConfig>
         <hashTree/>
-        <ResultCollector guiclass="TableVisualizer" testclass="ResultCollector" testname="View Results in Table" enabled="true">
+        <ResultCollector guiclass="TableVisualizer" testclass="ResultCollector" testname="View Results in Table">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
             <name>saveConfig</name>
@@ -730,7 +905,7 @@
           <stringProp name="filename"></stringProp>
         </ResultCollector>
         <hashTree/>
-        <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report">
+        <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
             <name>saveConfig</name>
@@ -776,11 +951,15 @@
           </collectionProp>
         </HeaderManager>
         <hashTree/>
-        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Transaction Controller" enabled="true">
+        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Transaction Controller">
           <boolProp name="TransactionController.includeTimers">false</boolProp>
         </TransactionController>
         <hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="REST Retrieve All Avocado Sales">
+          <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Constant Timer" enabled="true">
+            <stringProp name="ConstantTimer.delay">500</stringProp>
+          </ConstantTimer>
+          <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="REST Retrieve All Avocado Sales" enabled="true">
             <stringProp name="HTTPSampler.domain">localhost</stringProp>
             <stringProp name="HTTPSampler.port">8080</stringProp>
             <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -794,7 +973,7 @@
             </elementProp>
           </HTTPSamplerProxy>
           <hashTree/>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="REST Retrieve Avocado Sale By ID">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="REST Retrieve Avocado Sale By ID" enabled="true">
             <stringProp name="HTTPSampler.domain">localhost</stringProp>
             <stringProp name="HTTPSampler.port">8080</stringProp>
             <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -808,7 +987,7 @@
             </elementProp>
           </HTTPSamplerProxy>
           <hashTree/>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="REST Retrieve Avocado Sales By Type">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="REST Retrieve Avocado Sales By Type" enabled="true">
             <stringProp name="HTTPSampler.domain">localhost</stringProp>
             <stringProp name="HTTPSampler.port">8080</stringProp>
             <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -836,7 +1015,7 @@
             </elementProp>
           </HTTPSamplerProxy>
           <hashTree/>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="REST Create Avocado Sale">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="REST Create Avocado Sale" enabled="true">
             <stringProp name="HTTPSampler.domain">localhost</stringProp>
             <stringProp name="HTTPSampler.port">8080</stringProp>
             <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -872,7 +1051,7 @@
             </elementProp>
           </HTTPSamplerProxy>
           <hashTree/>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="REST Update Avocado Sale">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="REST Update Avocado Sale" enabled="true">
             <stringProp name="HTTPSampler.domain">localhost</stringProp>
             <stringProp name="HTTPSampler.port">8080</stringProp>
             <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -896,7 +1075,7 @@
             </elementProp>
           </HTTPSamplerProxy>
           <hashTree/>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="REST Aggregate Average Price By Region">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="REST Aggregate Average Price By Region" enabled="true">
             <stringProp name="HTTPSampler.domain">localhost</stringProp>
             <stringProp name="HTTPSampler.port">8080</stringProp>
             <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -910,7 +1089,7 @@
             </elementProp>
           </HTTPSamplerProxy>
           <hashTree/>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="REST Delete Avocado Sale">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="REST Delete Avocado Sale" enabled="true">
             <stringProp name="HTTPSampler.domain">localhost</stringProp>
             <stringProp name="HTTPSampler.port">8080</stringProp>
             <stringProp name="HTTPSampler.protocol">http</stringProp>
