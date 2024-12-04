@@ -1,9 +1,15 @@
+/**
+ * Entity class representing an avocado sale record.
+ * Maps to the "avocado_sales" table in the database and defines the structure of 
+ * the table's columns as fields in the class.
+ */
+
+
+
 package edu.unb.tiashack.avocado_api.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -11,17 +17,16 @@ import jakarta.persistence.Table;
 @Table(name = "avocado_sales")
 public class AvocadoSale {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; // unique identifier for the avocado sales record
+    private Long id; 
 
     @Column(name = "date")
-    private String date; // date of the sales observation
+    private String date; 
 
     @Column(name = "averageprice")
-    private double averagePrice; // average price of the avocados
+    private double averagePrice; 
 
     @Column(name = "totalvolume")
-    private double totalVolume; // total number of avocados sold
+    private double totalVolume; 
 
     @Column(name = "plu4046")
     private double plu4046;

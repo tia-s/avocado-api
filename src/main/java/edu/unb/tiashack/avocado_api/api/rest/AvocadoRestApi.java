@@ -60,7 +60,6 @@ public class AvocadoRestApi {
     // Create a new avocado sales record
     @PostMapping
     public ResponseEntity<AvocadoSale> createAvocadoSale(@RequestBody AvocadoSale avocadoSale) {
-        System.out.println(avocadoSale);
         AvocadoSale createdAvocadoSale = avocadoSaleService.createAvocadoSale(avocadoSale);
         return new ResponseEntity<>(createdAvocadoSale, HttpStatus.CREATED);
     }
