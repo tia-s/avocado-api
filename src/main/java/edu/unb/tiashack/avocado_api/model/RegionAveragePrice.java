@@ -1,5 +1,5 @@
 /**
- * Class representing the average price of avocados for a specific region.
+ * Represents the average price of avocados for a specific region.
  * Used to encapsulate the result of custom queries that calculate the average price of avocados by region.
  *
  * This class is not mapped to a database table directly but serves as a lightweight object 
@@ -8,18 +8,23 @@
  * Note: This level of explicitness is crucial for the GraphQL API, given its strongly typed nature.
  */
 
-
 package edu.unb.tiashack.avocado_api.model;
 
+import jakarta.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "RegionAveragePrice")
 public class RegionAveragePrice {
     private String region;
     private Double averagePrice;
+
+    public RegionAveragePrice() {}
 
     public RegionAveragePrice(String region, Double averagePrice) {
         this.region = region;
         this.averagePrice = averagePrice;
     }
 
+    // Getters and Setters...
     public String getRegion() {
         return region;
     }

@@ -1,6 +1,23 @@
+/**
+ * SOAP Web Service for managing Avocado Sales data.
+ * 
+ * This service provides SOAP endpoints to interact with the AvocadoSaleService.
+ * 
+ * Interface Implementation:
+ * - Implements the `AvocadoSoapApiInterface` to define contract-based SOAP operations.
+ * 
+ * Endpoint Base Path: `/soap`
+ * 
+ * Annotations:
+ * - @WebService: Marks this class as a SOAP Web Service and specifies the endpoint interface.
+ * - @Service: Indicates this is a Spring-managed service bean.
+ * - @Autowired: Injects the `AvocadoSaleService` dependency.
+ */
+
 package edu.unb.tiashack.avocado_api.api.soap;
 
 import edu.unb.tiashack.avocado_api.model.AvocadoSale;
+import edu.unb.tiashack.avocado_api.model.AvocadoSaleDTO;
 import edu.unb.tiashack.avocado_api.model.RegionAveragePrice;
 import jakarta.jws.WebService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +27,7 @@ import edu.unb.tiashack.avocado_api.service.AvocadoSaleService;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @WebService(endpointInterface = "edu.unb.tiashack.avocado_api.api.soap.AvocadoSoapApiInterface")
 @Service
@@ -21,42 +39,61 @@ public class AvocadoSoapApi implements AvocadoSoapApiInterface {
         this.avocadoSaleService = avocadoSaleService;
     }
 
+    // Retrieve all avocado sales records
     @Override
-    public List<AvocadoSale> getAllAvocadoSales(){
-        return avocadoSaleService.getAllAvocadoSales();
+    public List<AvocadoSaleDTO> getAllAvocadoSales(){
+        return avocadoSaleService.getAllAvocadoSales()
+                             .stream()
+                             .map(AvocadoSaleDTO::new)
+                             .collect(Collectors.toList());
     }
 
+    // Retrieve avocado sales record by ID
     @Override
-    public AvocadoSale getAvocadoSaleById(Long id) {
+    public AvocadoSaleDTO getAvocadoSaleById(Long id) {
         Optional<AvocadoSale> avocadoSale = avocadoSaleService.getAvocadoSaleById(id);
-        return avocadoSale.orElse(null);
+        return avocadoSale.map(AvocadoSaleDTO::new).orElse(null);
     }
 
+    // Retrieve avocado sales records by type
     @Override
-    public List<AvocadoSale> getAvocadoSalesByType(String type){
-        return avocadoSaleService.getAvocadoSalesByType(type);
+    public List<AvocadoSaleDTO> getAvocadoSalesByType(String type){
+        return avocadoSaleService.getAvocadoSalesByType(type)
+                                .stream()
+                                .map(AvocadoSaleDTO::new)
+                                .collect(Collectors.toList());
     }
 
+    // Retrieve avocado sales within price range
     @Override
-    public List<AvocadoSale> getAvocadoSalesByPriceRange(double minPrice, double maxPrice) {
-        return avocadoSaleService.getAvocadoSalesWithinPriceRange(minPrice, maxPrice);
+    public List<AvocadoSaleDTO> getAvocadoSalesByPriceRange(double minPrice, double maxPrice) {
+        return avocadoSaleService.getAvocadoSalesWithinPriceRange(minPrice, maxPrice)
+                                .stream()
+                                .map(AvocadoSaleDTO::new)
+                                .collect(Collectors.toList());
     }
 
+    // Create a new avocado sales record
     @Override
-    public AvocadoSale createAvocadoSale(AvocadoSale avocadoSale) {
-        return avocadoSaleService.createAvocadoSale(avocadoSale);
+    public AvocadoSaleDTO createAvocadoSale(AvocadoSale avocadoSale) {
+        AvocadoSale createdSale = avocadoSaleService.createAvocadoSale(avocadoSale);
+        return new AvocadoSaleDTO(createdSale);
     }
 
+    // Update an existing avocado sales record by ID
     @Override
-    public AvocadoSale updateAvocadoSale(Long id, Map<String, Object> updates) {
-        return avocadoSaleService.updateAvocadoSale(id, updates);
+    public AvocadoSaleDTO updateAvocadoSale(Long id, Map<String, Object> updates) {
+        AvocadoSale updatedSale = avocadoSaleService.updateAvocadoSale(id, updates);
+        return new AvocadoSaleDTO(updatedSale);
     }
 
+    // Calculate average price by region
     @Override
     public List<RegionAveragePrice> calculateAveragePriceByRegion(){
         return avocadoSaleService.calculateAveragePriceByRegion();
     }
 
+    // Delete an existing avocado sales record by ID
     @Override
     public void deleteAvocadoSale(Long id) {
         avocadoSaleService.deleteAvocadoSale(id);
