@@ -8,7 +8,7 @@ The Avocado API Project implements three types of APIs—GraphQL, SOAP, and REST
 The codebase is organized into the following packages:  
 
 ### Folder Structure  
-1. **`model`**: Contains entity classes for ORM (Object-Relational Mapping) to represent the database structure.  
+1. **`model`**: Contains entity classes for ORM (Object-Relational Mapping) to represent the database structure. It also includes models that help structure data for specific use cases.
 2. **`repository`**: Interacts with the database by extending Spring Data JPA repositories for CRUD operations and custom queries.  
 3. **`api`**: Contains API controllers and services for each API type:  
     - **soap**: Implements SOAP-based web services.  
@@ -168,15 +168,13 @@ Follow these steps to start the Avocado API application:
 
 2. Run Apache JMeter by navigating to its bin folder and running server.bat
 
-3. Download the Avocado API Test Plan from this repository (avocado_api_test_plan.jmx)
+3. Download the Avocado API Test Plan from this repository (avocado_api_jmeter_test_plan.jmx)
 
 4. Open the test plan in Apache JMeter
 
-5. In each thread group, update the number of threads, ramp-up period and loop count/duration based on the test type being ran (eg. baseline test, soak test, etc.)
+5. In each thread group, update the number of threads, ramp-up period and loop count/duration based on the test type being ran (eg. baseline test, soak test, etc.). *The default values (2 threads, 1s ramp-up period, and 1 loop count) can be used to perform a sample run in the Apache JMeter UI to ensure that the environment is configured correctly before executing the actual tests.*
 
 6. To run a test, execute the following command in a terminal:
     ```bash
     jmeter -n -t <path_to_avocado_api_test_plan.jmx> -l <path_to_result_file> -e -o <path_to_report_folder>
     ```
-
-
