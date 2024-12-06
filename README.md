@@ -2,7 +2,7 @@
 # Avocado API Project : CS6905 - The TiaShack Interface
 
 ## Project Overview  
-The Avocado API Project implements three types of APIs—GraphQL, SOAP, and REST—for interacting with avocado sales data stored in a PostgreSQL database. The aim of this project is to implement identical APIs in the three paradigms in order to compare their performance. 
+The Avocado API Project implements three types of APIs—GraphQL, SOAP, and REST—for interacting with avocado sales data stored in a PostgreSQL database. [The Avocado Prices Dataset](https://www.kaggle.com/datasets/neuromusic/avocado-prices) is used to create the APIs. The aim of this project is to implement identical APIs in the three paradigms in order to compare their performance. 
 
 ## Project Structure  
 The codebase is organized into the following packages:  
