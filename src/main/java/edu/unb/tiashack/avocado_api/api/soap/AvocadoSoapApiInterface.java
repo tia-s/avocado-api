@@ -1,3 +1,15 @@
+/**
+ * SOAP API Interface for Avocado Sales operations.
+ * 
+ * Defines the contract for the SOAP web service.
+ * 
+ * Annotations:
+ * - @WebService: Marks this as a SOAP web service interface.
+ * - @WebMethod: Exposes methods as SOAP operations.
+ * - @WebParam: Specifies parameter names for SOAP operations.
+ */
+
+
 package edu.unb.tiashack.avocado_api.api.soap;
 
 import edu.unb.tiashack.avocado_api.model.RegionAveragePrice;
@@ -7,9 +19,6 @@ import jakarta.jws.WebParam;
 
 import edu.unb.tiashack.avocado_api.model.AvocadoSale;
 import edu.unb.tiashack.avocado_api.model.AvocadoSaleDTO;
-
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Map;

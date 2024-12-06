@@ -1,3 +1,23 @@
+/**
+ * REST Controller for managing Avocado Sales data.
+ * 
+ * This controller provides endpoints to interact with the AvocadoSaleService.
+ * 
+ * Functionalities:
+ * - Retrieve all avocado sales or specific records based on ID, type, or price range.
+ * - Create, update, and delete avocado sales records.
+ * - Calculate average avocado prices by region.
+ * 
+ * Endpoint Base Path: `/rest`
+ * 
+ * Annotations:
+ * - @RestController: Marks the class as a REST API controller.
+ * - @RequestMapping: Sets the base path for the endpoints.
+ * - @GetMapping, @PostMapping, @PutMapping, @DeleteMapping: Maps HTTP methods to handler methods.
+ * - @RequestBody: Maps the body of HTTP requests to method parameters.
+ * - @PathVariable: Maps URL path variables to method parameters.
+ * - @RequestParam: Maps query parameters to method parameters.
+*/
 package edu.unb.tiashack.avocado_api.api.rest;
 
 import edu.unb.tiashack.avocado_api.model.AvocadoSale;
@@ -47,6 +67,7 @@ public class AvocadoRestApi {
                 : ResponseEntity.ok(avocadoSales);
     }
 
+    // Retrieve avocado sales within price range
     @GetMapping("/price-range")
     public ResponseEntity<List<AvocadoSale>> getAvocadoSalesByPriceRange(
             @RequestParam double minPrice,
@@ -60,7 +81,6 @@ public class AvocadoRestApi {
     // Create a new avocado sales record
     @PostMapping
     public ResponseEntity<AvocadoSale> createAvocadoSale(@RequestBody AvocadoSale avocadoSale) {
-        System.out.println(avocadoSale);
         AvocadoSale createdAvocadoSale = avocadoSaleService.createAvocadoSale(avocadoSale);
         return new ResponseEntity<>(createdAvocadoSale, HttpStatus.CREATED);
     }
@@ -72,14 +92,11 @@ public class AvocadoRestApi {
             AvocadoSale updatedAvocadoSale = avocadoSaleService.updateAvocadoSale(id, updates);
 
             if (updatedAvocadoSale != null) {
-                // Return the updated avocado sale with a 200 OK status
                 return ResponseEntity.ok(updatedAvocadoSale);
             } else {
-                // Return a 404 Not Found if the avocado sale with the given ID does not exist
                 return ResponseEntity.notFound().build();
             }
         } catch (IllegalArgumentException e) {
-            // Return a 400 Bad Request for invalid input
             return ResponseEntity.badRequest().body(null);
         }
     }

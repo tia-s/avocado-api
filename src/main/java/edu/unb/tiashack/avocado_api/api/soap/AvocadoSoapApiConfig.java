@@ -1,3 +1,15 @@
+/**
+ * Configuration class for setting up SOAP API endpoints using Apache CXF.
+ * 
+ * Responsibilities:
+ * - Registers the CXF servlet to handle SOAP requests under the `/soap` path.
+ * - Configures the SpringBus for managing CXF infrastructure.
+ * 
+ * Annotations:
+ * - @Configuration: Marks this as a Spring configuration class.
+ * - @Bean: Defines beans for CXF servlet, SpringBus, and SOAP endpoint.
+ */
+
 package edu.unb.tiashack.avocado_api.api.soap;
 
 import edu.unb.tiashack.avocado_api.service.AvocadoSaleService;

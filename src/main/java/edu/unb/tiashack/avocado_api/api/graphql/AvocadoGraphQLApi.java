@@ -1,3 +1,23 @@
+/**
+ * GraphQL Controller for managing Avocado Sales data.
+ * 
+ * This controller provides Query and Mutation mappings to enable interaction with the AvocadoSaleService 
+ * using GraphQL queries and mutations.
+ * 
+ * Functionalities provided include fetching avocado sales data, creating new sales records,
+ * updating existing sales, and calculating regional averages.
+ * 
+ * Note: This controller relies on DTO transformations (AvocadoSaleDTO) for GraphQL responses.
+ * 
+ * Endpoint Base Path: `/graphql`
+ * 
+ * Annotations:
+ * @Controller: Marks this class as a Spring GraphQL controller.
+ * @QueryMapping: Annotation for GraphQL queries.
+ * @MutationMapping: Annotation for GraphQL mutations.
+ * @Argument: Used to map GraphQL query/mutation arguments to method parameters.
+*/
+
 package edu.unb.tiashack.avocado_api.api.graphql;
 
 import edu.unb.tiashack.avocado_api.model.AvocadoSale;
@@ -12,7 +32,6 @@ import org.springframework.stereotype.Controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -29,9 +48,9 @@ public class AvocadoGraphQLApi {
         this.avocadoSaleService = avocadoSaleService;
     }
 
+    // Retrieve all avocado sales records
     @QueryMapping
     public List<AvocadoSaleDTO> getAllAvocadoSales() {
-       System.out.println(avocadoSaleService.getAllAvocadoSales());
         return avocadoSaleService.getAllAvocadoSales()
                              .stream()
                              .map(AvocadoSaleDTO::new)
@@ -39,12 +58,14 @@ public class AvocadoGraphQLApi {
 
     }
 
+    // Retrieve avocado sales record by ID
     @QueryMapping
     public AvocadoSaleDTO getAvocadoSaleById(@Argument Long id) {
         Optional<AvocadoSale> avocadoSale = avocadoSaleService.getAvocadoSaleById(id);
         return avocadoSale.map(AvocadoSaleDTO::new).orElse(null);
     }
 
+    // Retrieve avocado sales records by type
     @QueryMapping
     public List<AvocadoSaleDTO> getAvocadoSalesByType(@Argument String type) {
   
@@ -54,6 +75,7 @@ public class AvocadoGraphQLApi {
                              .collect(Collectors.toList());
     }
 
+    // Retrieve avocado sales within price range
     @QueryMapping
     public List<AvocadoSaleDTO> getAvocadoSalesByPriceRange(@Argument double minPrice, @Argument double maxPrice) {
         return avocadoSaleService.getAvocadoSalesWithinPriceRange(minPrice, maxPrice)
@@ -63,6 +85,7 @@ public class AvocadoGraphQLApi {
 
     }
 
+    // Create a new avocado sales record
     @MutationMapping
     public AvocadoSaleDTO createAvocadoSale(
             @Argument Long id,
@@ -85,16 +108,14 @@ public class AvocadoGraphQLApi {
             dateConvertedToDate = new SimpleDateFormat("yyyy-MM-dd").parse(date);
         } catch (ParseException e) {
             e.printStackTrace();
-            // Handle the exception as needed
         }
         AvocadoSale avocadoSale = new AvocadoSale(id, dateConvertedToDate, averagePrice, totalVolume, plu4046, plu4225, plu4770, totalBags, smallBags, largeBags, xLargeBags, type, year, region);
-    System.out.println("AvocadoSale object created: " + avocadoSale);
 
     AvocadoSale savedSale = avocadoSaleService.createAvocadoSale(avocadoSale);
-    System.out.println("AvocadoSale saved: " + savedSale);
         return savedSale != null ? new AvocadoSaleDTO(savedSale) : null;
     }
 
+    // Update an existing avocado sales record by ID
     @MutationMapping
     public AvocadoSaleDTO updateAvocadoSale(@Argument Long id, @Argument Map<String, Object> updates) {
         AvocadoSale updatedSale = avocadoSaleService.updateAvocadoSale(id, updates);
@@ -102,11 +123,13 @@ public class AvocadoGraphQLApi {
         
     }
 
+    // Calculate average price by region
     @QueryMapping
     public List<RegionAveragePrice> calculateAveragePriceByRegion() {
         return avocadoSaleService.calculateAveragePriceByRegion();
     }
 
+    // Delete an existing avocado sales record by ID
     @MutationMapping
     public boolean deleteAvocadoSale(@Argument Long id) {
         try {

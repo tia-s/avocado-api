@@ -1,10 +1,18 @@
+/**
+ * Data Transfer Object (DTO) for AvocadoSale.
+ * 
+ * This class is used to format data for API responses for the GraphQL and SOAP APIs. 
+ * 
+ * GraphQL and SOAP benefit from strongly defined DTOs for better schema control.
+ * 
+*/
 package edu.unb.tiashack.avocado_api.model;
 
 import java.text.SimpleDateFormat;
 
 public class AvocadoSaleDTO {
     private Long id;
-    private String date; // Use String for GraphQL compatibility
+    private String date; // Use String for GraphQL and SOAP compatibility
     private Double averagePrice;
     private Double totalVolume;
     private Double plu4046;
@@ -17,6 +25,8 @@ public class AvocadoSaleDTO {
     private String type;
     private Long year;
     private String region;
+
+    public AvocadoSaleDTO() {}
 
     public AvocadoSaleDTO(AvocadoSale sale) {
         this.id = sale.getId();
@@ -35,7 +45,7 @@ public class AvocadoSaleDTO {
         this.region = sale.getRegion();
     }
 
-    // Getters and setters...
+    // Getters and Setters...
     public Long getId() {
         return id;
     }

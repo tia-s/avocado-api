@@ -1,38 +1,38 @@
+/**
+ * Entity class representing an avocado sale record.
+ * 
+ * Maps to the "avocado_sales" table in the database and defines the structure of 
+ * the table's columns as fields in the class.
+*/
 package edu.unb.tiashack.avocado_api.model;
 
-import java.time.LocalDate;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-// import edu.unb.tiashack.avocado_api.api.Utils.LocalDateAdapter;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 @Entity
 @Table(name = "avocado_sales")
 public class AvocadoSale {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; // unique identifier for the avocado sales record
+    private Long id; 
 
     @Column(name = "date")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    private Date date; // date of the sales observation
+    private Date date; 
 
     @Column(name = "averageprice")
-    private double averagePrice; // average price of the avocados
+    private double averagePrice; 
 
     @Column(name = "totalvolume")
-    private double totalVolume; // total number of avocados sold
+    private double totalVolume; 
 
     @Column(name = "plu4046")
     private double plu4046;
@@ -63,6 +63,28 @@ public class AvocadoSale {
 
     @Column(name = "region")
     private String region;
+
+    public AvocadoSale() {}
+
+    public AvocadoSale(Long id, Date date, double averagePrice, double totalVolume,
+                           double plu4046, double plu4225, double plu4770, double totalBags,
+                           double smallBags, double largeBags, double xLargeBags, String type,
+                           Long year, String region) {
+        this.id = id;
+        this.date = date;
+        this.averagePrice = averagePrice;
+        this.totalVolume = totalVolume;
+        this.plu4046 = plu4046;
+        this.plu4225 = plu4225;
+        this.plu4770 = plu4770;
+        this.totalBags = totalBags;
+        this.smallBags = smallBags;
+        this.largeBags = largeBags;
+        this.xLargeBags = xLargeBags;
+        this.type = type;
+        this.year = year;
+        this.region = region;
+    }
 
     public Long getId() {
         return id;
@@ -173,28 +195,6 @@ public class AvocadoSale {
     }
 
     public void setRegion(String region) {
-        this.region = region;
-    }
-
-    public AvocadoSale() {}
-
-    public AvocadoSale(Long id, Date date, double averagePrice, double totalVolume,
-                           double plu4046, double plu4225, double plu4770, double totalBags,
-                           double smallBags, double largeBags, double xLargeBags, String type,
-                           Long year, String region) {
-        this.id = id;
-        this.date = date;
-        this.averagePrice = averagePrice;
-        this.totalVolume = totalVolume;
-        this.plu4046 = plu4046;
-        this.plu4225 = plu4225;
-        this.plu4770 = plu4770;
-        this.totalBags = totalBags;
-        this.smallBags = smallBags;
-        this.largeBags = largeBags;
-        this.xLargeBags = xLargeBags;
-        this.type = type;
-        this.year = year;
         this.region = region;
     }
 

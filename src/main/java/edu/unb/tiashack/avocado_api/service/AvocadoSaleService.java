@@ -1,3 +1,14 @@
+/**
+ * Service class for managing business logic related to AvocadoSale entities.
+ * This class interacts with the AvocadoSaleRepository to retrieve, update, and manage 
+ * avocado sale data while implementing necessary validations and transaction management.
+ *
+ * 
+ * Annotations:
+ * This class uses Spring's @Service annotation to mark it as a service component 
+ * and @Transactional annotations to ensure transactional integrity during database operations.
+**/
+
 package edu.unb.tiashack.avocado_api.service;
 
 import edu.unb.tiashack.avocado_api.model.AvocadoSale;
@@ -9,14 +20,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.Map;
 import java.util.NoSuchElementException;
-import java.util.stream.Collectors;
 
 @Service
 public class AvocadoSaleService {
@@ -74,7 +82,6 @@ public class AvocadoSaleService {
      */
     @Transactional
     public AvocadoSale createAvocadoSale(AvocadoSale avocadoSale) {
-        
         // return null;
         return avocadoSaleRepository.save(avocadoSale);
     }
@@ -87,7 +94,6 @@ public class AvocadoSaleService {
      */
     @Transactional
    public AvocadoSale updateAvocadoSale(Long id, Map<String, Object> updates) {
-    System.out.println("Updating AvocadoSale with ID: " + id);
     
     // Get the existing sale by ID
     Optional<AvocadoSale> existingSaleOpt = avocadoSaleRepository.findById(id);
@@ -95,20 +101,16 @@ public class AvocadoSaleService {
     // If the sale exists, update the fields
     if (existingSaleOpt.isPresent()) {
         AvocadoSale existingSale = existingSaleOpt.get();
-        System.out.println("Existing sale found: " + existingSale);
 
         // For each key in the updates map, update the corresponding field in the existing sale
         updates.forEach((key, value) -> {
-            System.out.println("Updating field: " + key + " with value: " + value);
             switch (key) {
                 case "date":
                     if (value instanceof String) {
                         try {
                             Date date = new SimpleDateFormat("yyyy-MM-dd").parse((String) value);
                             existingSale.setDate(date);
-                            System.out.println("Date updated to: " + date);
                         } catch (ParseException e) {
-                            System.out.println("Invalid date format: " + value);
                             throw new IllegalArgumentException("Invalid date format", e);
                         }
                     } else {
@@ -118,7 +120,6 @@ public class AvocadoSaleService {
                 case "averagePrice":
                     if (value instanceof Double) {
                         existingSale.setAveragePrice((Double) value);
-                        System.out.println("AveragePrice updated to: " + value);
                     } else {
                         throw new IllegalArgumentException("Invalid type for averagePrice");
                     }
@@ -126,7 +127,6 @@ public class AvocadoSaleService {
                 case "totalVolume":
                     if (value instanceof Double) {
                         existingSale.setTotalVolume((Double) value);
-                        System.out.println("TotalVolume updated to: " + value);
                     } else {
                         throw new IllegalArgumentException("Invalid type for totalVolume");
                     }
@@ -134,7 +134,6 @@ public class AvocadoSaleService {
                 case "plu4046":
                     if (value instanceof Double) {
                         existingSale.setPlu4046((Double) value);
-                        System.out.println("PLU 4046 updated to: " + value);
                     } else {
                         throw new IllegalArgumentException("Invalid type for plu4046");
                     }
@@ -142,7 +141,6 @@ public class AvocadoSaleService {
                 case "plu4225":
                     if (value instanceof Double) {
                         existingSale.setPlu4225((Double) value);
-                        System.out.println("PLU 4225 updated to: " + value);
                     } else {
                         throw new IllegalArgumentException("Invalid type for plu4225");
                     }
@@ -150,7 +148,6 @@ public class AvocadoSaleService {
                 case "plu4770":
                     if (value instanceof Double) {
                         existingSale.setPlu4770((Double) value);
-                        System.out.println("PLU 4770 updated to: " + value);
                     } else {
                         throw new IllegalArgumentException("Invalid type for plu4770");
                     }
@@ -158,7 +155,6 @@ public class AvocadoSaleService {
                 case "totalBags":
                     if (value instanceof Double) {
                         existingSale.setTotalBags((Double) value);
-                        System.out.println("TotalBags updated to: " + value);
                     } else {
                         throw new IllegalArgumentException("Invalid type for totalBags");
                     }
@@ -166,7 +162,6 @@ public class AvocadoSaleService {
                 case "smallBags":
                     if (value instanceof Double) {
                         existingSale.setSmallBags((Double) value);
-                        System.out.println("SmallBags updated to: " + value);
                     } else {
                         throw new IllegalArgumentException("Invalid type for smallBags");
                     }
@@ -174,7 +169,6 @@ public class AvocadoSaleService {
                 case "largeBags":
                     if (value instanceof Double) {
                         existingSale.setLargeBags((Double) value);
-                        System.out.println("LargeBags updated to: " + value);
                     } else {
                         throw new IllegalArgumentException("Invalid type for largeBags");
                     }
@@ -182,7 +176,6 @@ public class AvocadoSaleService {
                 case "xLargeBags":
                     if (value instanceof Double) {
                         existingSale.setXLargeBags((Double) value);
-                        System.out.println("XLargeBags updated to: " + value);
                     } else {
                         throw new IllegalArgumentException("Invalid type for xLargeBags");
                     }
@@ -190,7 +183,6 @@ public class AvocadoSaleService {
                 case "type":
                     if (value instanceof String) {
                         existingSale.setType((String) value);
-                        System.out.println("Type updated to: " + value);
                     } else {
                         throw new IllegalArgumentException("Invalid type for type");
                     }
@@ -198,7 +190,6 @@ public class AvocadoSaleService {
                 case "year":
                     if (value instanceof Long) {
                         existingSale.setYear((Long) value);
-                        System.out.println("Year updated to: " + value);
                     } else {
                         throw new IllegalArgumentException("Invalid type for year");
                     }
@@ -206,7 +197,6 @@ public class AvocadoSaleService {
                 case "region":
                     if (value instanceof String) {
                         existingSale.setRegion((String) value);
-                        System.out.println("Region updated to: " + value);
                     } else {
                         throw new IllegalArgumentException("Invalid type for region");
                     }
@@ -217,10 +207,8 @@ public class AvocadoSaleService {
         });
 
         AvocadoSale updatedSale = avocadoSaleRepository.save(existingSale);
-        System.out.println("Updated sale saved: " + updatedSale);
         return updatedSale;
     } else {
-        System.out.println("No sale found with ID: " + id);
         throw new NoSuchElementException("No sale found with ID: " + id);
     }
 }
