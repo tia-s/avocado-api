@@ -11,11 +11,9 @@ spring:
       enabled: true
 
   datasource:
-  # url: jdbc:postgresql://avocadoapidb.c9k4qkkyqxo6.us-east-2.rds.amazonaws.com:5432/avocadoapidb
-  #   url: jdbc:postgresql://localhost:5432/tiashackinterface
-    url: jdbc:postgresql://aws-0-ca-central-1.pooler.supabase.com:6543/postgres #supabase db
-    username: ${username}
-    password: ${password}
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: rukario08.
     driver-class-name: org.postgresql.Driver
     hikari:
       maximum-pool-size: 50

@@ -1,6 +1,7 @@
 package edu.unb.tiashack.avocado_api.api.soap;
 
 import edu.unb.tiashack.avocado_api.model.AvocadoSale;
+import edu.unb.tiashack.avocado_api.model.AvocadoSaleDTO;
 import edu.unb.tiashack.avocado_api.model.RegionAveragePrice;
 import jakarta.jws.WebService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @WebService(endpointInterface = "edu.unb.tiashack.avocado_api.api.soap.AvocadoSoapApiInterface")
 @Service
@@ -26,34 +28,46 @@ public class AvocadoSoapApi implements AvocadoSoapApiInterface {
     }
 
     @Override
-    public List<AvocadoSale> getAllAvocadoSales(){
-        return avocadoSaleService.getAllAvocadoSales();
+    public List<AvocadoSaleDTO> getAllAvocadoSales(){
+        // return avocadoSaleService.getAllAvocadoSales();
+        return avocadoSaleService.getAllAvocadoSales()
+                             .stream()
+                             .map(AvocadoSaleDTO::new)
+                             .collect(Collectors.toList());
     }
 
     @Override
-    public AvocadoSale getAvocadoSaleById(Long id) {
+    public AvocadoSaleDTO getAvocadoSaleById(Long id) {
         Optional<AvocadoSale> avocadoSale = avocadoSaleService.getAvocadoSaleById(id);
-        return avocadoSale.orElse(null);
+        return avocadoSale.map(AvocadoSaleDTO::new).orElse(null);
     }
 
     @Override
-    public List<AvocadoSale> getAvocadoSalesByType(String type){
-        return avocadoSaleService.getAvocadoSalesByType(type);
+    public List<AvocadoSaleDTO> getAvocadoSalesByType(String type){
+        return avocadoSaleService.getAvocadoSalesByType(type)
+                                .stream()
+                                .map(AvocadoSaleDTO::new)
+                                .collect(Collectors.toList());
     }
 
     @Override
-    public List<AvocadoSale> getAvocadoSalesByPriceRange(double minPrice, double maxPrice) {
-        return avocadoSaleService.getAvocadoSalesWithinPriceRange(minPrice, maxPrice);
+    public List<AvocadoSaleDTO> getAvocadoSalesByPriceRange(double minPrice, double maxPrice) {
+        return avocadoSaleService.getAvocadoSalesWithinPriceRange(minPrice, maxPrice)
+                                .stream()
+                                .map(AvocadoSaleDTO::new)
+                                .collect(Collectors.toList());
     }
 
     @Override
-    public AvocadoSale createAvocadoSale(AvocadoSale avocadoSale) {
-        return avocadoSaleService.createAvocadoSale(avocadoSale);
+    public AvocadoSaleDTO createAvocadoSale(AvocadoSale avocadoSale) {
+        AvocadoSale createdSale = avocadoSaleService.createAvocadoSale(avocadoSale);
+        return new AvocadoSaleDTO(createdSale);
     }
 
     @Override
-    public AvocadoSale updateAvocadoSale(Long id, Map<String, Object> updates) {
-        return avocadoSaleService.updateAvocadoSale(id, updates);
+    public AvocadoSaleDTO updateAvocadoSale(Long id, Map<String, Object> updates) {
+        AvocadoSale updatedSale = avocadoSaleService.updateAvocadoSale(id, updates);
+        return new AvocadoSaleDTO(updatedSale);
     }
 
     @Override

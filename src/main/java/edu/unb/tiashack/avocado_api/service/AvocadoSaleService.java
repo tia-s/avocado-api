@@ -7,10 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @Service
@@ -81,118 +86,144 @@ public class AvocadoSaleService {
      * @return The updated avocado sale
      */
     @Transactional
-    public AvocadoSale updateAvocadoSale(Long id, Map<String, Object> updates) {
-        // Get the existing sale by ID
-        Optional<AvocadoSale> existingSaleOpt = avocadoSaleRepository.findById(id);
+   public AvocadoSale updateAvocadoSale(Long id, Map<String, Object> updates) {
+    System.out.println("Updating AvocadoSale with ID: " + id);
+    
+    // Get the existing sale by ID
+    Optional<AvocadoSale> existingSaleOpt = avocadoSaleRepository.findById(id);
 
-        // If the sale exists, update the fields
-        if (existingSaleOpt.isPresent()) {
-            AvocadoSale existingSale = existingSaleOpt.get();// Get the existing sale
+    // If the sale exists, update the fields
+    if (existingSaleOpt.isPresent()) {
+        AvocadoSale existingSale = existingSaleOpt.get();
+        System.out.println("Existing sale found: " + existingSale);
 
-            //for each key in the updates map, update the corresponding field in the existing sale
-            updates.forEach((key, value) -> {
-                switch (key) {
-                    case "date"://if the key is date update the date field in the existing sale with the value if the value is of type string else throw an exception
-                        if (value instanceof String) {
-                            existingSale.setDate((String) value);
-                        } else {
-                            throw new IllegalArgumentException("Invalid type for date");
+        // For each key in the updates map, update the corresponding field in the existing sale
+        updates.forEach((key, value) -> {
+            System.out.println("Updating field: " + key + " with value: " + value);
+            switch (key) {
+                case "date":
+                    if (value instanceof String) {
+                        try {
+                            Date date = new SimpleDateFormat("yyyy-MM-dd").parse((String) value);
+                            existingSale.setDate(date);
+                            System.out.println("Date updated to: " + date);
+                        } catch (ParseException e) {
+                            System.out.println("Invalid date format: " + value);
+                            throw new IllegalArgumentException("Invalid date format", e);
                         }
-                        break;
-                    case "averagePrice"://if the key is averagePrice update the averagePrice field in the existing sale with the value if the value is of type double else throw an exception
-                        if (value instanceof Double) {
-                            existingSale.setAveragePrice((Double) value);
-                        } else {
-                            throw new IllegalArgumentException("Invalid type for averagePrice");
-                        }
-                        break;
-                    case "totalVolume"://if the key is totalVolume update the totalVolume field in the existing sale with the value if the value is of type double else throw an exception
-                        if (value instanceof Double) {
-                            existingSale.setTotalVolume((Double) value);
-                        } else {
-                            throw new IllegalArgumentException("Invalid type for totalVolume");
-                        }
-                        break;
-                    case "plu4046"://if the key is plu4046 update the plu4046 field in the existing sale with the value if the value is of type double else throw an exception
-                        if (value instanceof Double) {
-                            existingSale.setPlu4046((Double) value);
-                        } else {
-                            throw new IllegalArgumentException("Invalid type for plu4046");
-                        }
-                        break;
-                    case "plu4225"://if the key is plu4225 update the plu4225 field in the existing sale with the value if the value is of type double else throw an exception
-                        if (value instanceof Double) {
-                            existingSale.setPlu4225((Double) value);
-                        } else {
-                            throw new IllegalArgumentException("Invalid type for plu4225");
-                        }
-                        break;
-                    case "plu4770"://if the key is plu4770 update the plu4770 field in the existing sale with the value if the value is of type double else throw an exception
-                        if (value instanceof Double) {
-                            existingSale.setPlu4770((Double) value);
-                        } else {
-                            throw new IllegalArgumentException("Invalid type for plu4770");
-                        }
-                        break;
-                    case "totalBags"://if the key is totalBags update the totalBags field in the existing sale with the value if the value is of type double else throw an exception
-                        if (value instanceof Double) {
-                            existingSale.setTotalBags((Double) value);
-                        } else {
-                            throw new IllegalArgumentException("Invalid type for totalBags");
-                        }
-                        break;
-                    case "smallBags"://if the key is smallBags update the smallBags field in the existing sale with the value if the value is of type double else throw an exception
-                        if (value instanceof Double) {
-                            existingSale.setSmallBags((Double) value);
-                        } else {
-                            throw new IllegalArgumentException("Invalid type for smallBags");
-                        }
-                        break;
-                    case "largeBags"://if the key is largeBags update the largeBags field in the existing sale with the value if the value is of type double else throw an exception
-                        if (value instanceof Double) {
-                            existingSale.setLargeBags((Double) value);
-                        } else {
-                            throw new IllegalArgumentException("Invalid type for largeBags");
-                        }
-                        break;
-                    case "xLargeBags"://if the key is xLargeBags update the xLargeBags field in the existing sale with the value if the value is of type double else throw an exception
-                        if (value instanceof Double) {
-                            existingSale.setXLargeBags((Double) value);
-                        } else {
-                            throw new IllegalArgumentException("Invalid type for xLargeBags");
-                        }
-                        break;
-                    case "type"://if the key is type update the type field in the existing sale with the value if the value is of type string else throw an exception
-                        if (value instanceof String) {
-                            existingSale.setType((String) value);
-                        } else {
-                            throw new IllegalArgumentException("Invalid type for type");
-                        }
-                        break;
-                    case "year"://if the key is year update the year field in the existing sale with the value if the value is of type long else throw an exception
-                        if (value instanceof Long) {
-                            existingSale.setYear((Long) value);
-                        } else {
-                            throw new IllegalArgumentException("Invalid type for year");
-                        }
-                        break;
-                    case "region"://if the key is region update the region field in the existing sale with the value if the value is of type string else throw an exception
-                        if (value instanceof String) {
-                            existingSale.setRegion((String) value);
-                        } else {
-                            throw new IllegalArgumentException("Invalid type for region");
-                        }
-                        break;
-                    default://if the key is not any of the above throw an exception
-                        throw new IllegalArgumentException("Invalid field: " + key); // Handle invalid fields
-                }
-            });
+                    } else {
+                        throw new IllegalArgumentException("Invalid type for date");
+                    }
+                    break;
+                case "averagePrice":
+                    if (value instanceof Double) {
+                        existingSale.setAveragePrice((Double) value);
+                        System.out.println("AveragePrice updated to: " + value);
+                    } else {
+                        throw new IllegalArgumentException("Invalid type for averagePrice");
+                    }
+                    break;
+                case "totalVolume":
+                    if (value instanceof Double) {
+                        existingSale.setTotalVolume((Double) value);
+                        System.out.println("TotalVolume updated to: " + value);
+                    } else {
+                        throw new IllegalArgumentException("Invalid type for totalVolume");
+                    }
+                    break;
+                case "plu4046":
+                    if (value instanceof Double) {
+                        existingSale.setPlu4046((Double) value);
+                        System.out.println("PLU 4046 updated to: " + value);
+                    } else {
+                        throw new IllegalArgumentException("Invalid type for plu4046");
+                    }
+                    break;
+                case "plu4225":
+                    if (value instanceof Double) {
+                        existingSale.setPlu4225((Double) value);
+                        System.out.println("PLU 4225 updated to: " + value);
+                    } else {
+                        throw new IllegalArgumentException("Invalid type for plu4225");
+                    }
+                    break;
+                case "plu4770":
+                    if (value instanceof Double) {
+                        existingSale.setPlu4770((Double) value);
+                        System.out.println("PLU 4770 updated to: " + value);
+                    } else {
+                        throw new IllegalArgumentException("Invalid type for plu4770");
+                    }
+                    break;
+                case "totalBags":
+                    if (value instanceof Double) {
+                        existingSale.setTotalBags((Double) value);
+                        System.out.println("TotalBags updated to: " + value);
+                    } else {
+                        throw new IllegalArgumentException("Invalid type for totalBags");
+                    }
+                    break;
+                case "smallBags":
+                    if (value instanceof Double) {
+                        existingSale.setSmallBags((Double) value);
+                        System.out.println("SmallBags updated to: " + value);
+                    } else {
+                        throw new IllegalArgumentException("Invalid type for smallBags");
+                    }
+                    break;
+                case "largeBags":
+                    if (value instanceof Double) {
+                        existingSale.setLargeBags((Double) value);
+                        System.out.println("LargeBags updated to: " + value);
+                    } else {
+                        throw new IllegalArgumentException("Invalid type for largeBags");
+                    }
+                    break;
+                case "xLargeBags":
+                    if (value instanceof Double) {
+                        existingSale.setXLargeBags((Double) value);
+                        System.out.println("XLargeBags updated to: " + value);
+                    } else {
+                        throw new IllegalArgumentException("Invalid type for xLargeBags");
+                    }
+                    break;
+                case "type":
+                    if (value instanceof String) {
+                        existingSale.setType((String) value);
+                        System.out.println("Type updated to: " + value);
+                    } else {
+                        throw new IllegalArgumentException("Invalid type for type");
+                    }
+                    break;
+                case "year":
+                    if (value instanceof Long) {
+                        existingSale.setYear((Long) value);
+                        System.out.println("Year updated to: " + value);
+                    } else {
+                        throw new IllegalArgumentException("Invalid type for year");
+                    }
+                    break;
+                case "region":
+                    if (value instanceof String) {
+                        existingSale.setRegion((String) value);
+                        System.out.println("Region updated to: " + value);
+                    } else {
+                        throw new IllegalArgumentException("Invalid type for region");
+                    }
+                    break;
+                default:
+                    throw new IllegalArgumentException("Invalid field: " + key);
+            }
+        });
 
-            return avocadoSaleRepository.save(existingSale);//save the updated sale
-        } else {//if the sale does not exist return null
-            return null;
-        }
+        AvocadoSale updatedSale = avocadoSaleRepository.save(existingSale);
+        System.out.println("Updated sale saved: " + updatedSale);
+        return updatedSale;
+    } else {
+        System.out.println("No sale found with ID: " + id);
+        throw new NoSuchElementException("No sale found with ID: " + id);
     }
+}
 
     /*
      * Calculate the average price of avocados by region

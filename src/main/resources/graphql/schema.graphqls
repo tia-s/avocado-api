@@ -1,6 +1,7 @@
+scalar Date
 type AvocadoSale {
     id: ID!
-    date: String!
+    date: Date!
     averagePrice: Float!
     totalVolume: Float!
     plu4046: Float!

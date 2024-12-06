@@ -1,11 +1,20 @@
 package edu.unb.tiashack.avocado_api.model;
 
+import java.time.LocalDate;
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+// import edu.unb.tiashack.avocado_api.api.Utils.LocalDateAdapter;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 @Entity
 @Table(name = "avocado_sales")
@@ -15,7 +24,9 @@ public class AvocadoSale {
     private Long id; // unique identifier for the avocado sales record
 
     @Column(name = "date")
-    private String date; // date of the sales observation
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private Date date; // date of the sales observation
 
     @Column(name = "averageprice")
     private double averagePrice; // average price of the avocados
@@ -61,11 +72,11 @@ public class AvocadoSale {
         this.id = id;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -167,7 +178,7 @@ public class AvocadoSale {
 
     public AvocadoSale() {}
 
-    public AvocadoSale(Long id, String date, double averagePrice, double totalVolume,
+    public AvocadoSale(Long id, Date date, double averagePrice, double totalVolume,
                            double plu4046, double plu4225, double plu4770, double totalBags,
                            double smallBags, double largeBags, double xLargeBags, String type,
                            Long year, String region) {

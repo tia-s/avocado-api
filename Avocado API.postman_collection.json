@@ -1,0 +1,716 @@
+{
+	"info": {
+		"_postman_id": "995c0e0e-e0ff-4062-b605-3e676fcc3316",
+		"name": "Avocado API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "479652"
+	},
+	"item": [
+		{
+			"name": "REST",
+			"item": [
+				{
+					"name": "Retrieve All Avocado Sales",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/rest",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"rest"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve Avocado Sale By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/rest/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"rest",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve Avocado Sales By Type",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/rest/type/conventional",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"rest",
+								"type",
+								"conventional"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve Avocado Sales In Price Range",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/rest/price-range?minPrice=1&maxPrice=2.5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"rest",
+								"price-range"
+							],
+							"query": [
+								{
+									"key": "minPrice",
+									"value": "1"
+								},
+								{
+									"key": "maxPrice",
+									"value": "2.5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Avocado Sale",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"date\": \"2024-11-19\",\r\n    \"averagePrice\": 3.50,\r\n    \"totalVolume\": 1000.00,\r\n    \"plu4046\": 30.4,\r\n    \"plu4225\": 28.6,\r\n    \"plu4770\": 51.8,\r\n    \"totalBags\": 8200.00,\r\n    \"smallBags\": 500.50,\r\n    \"largeBags\": 100.00,\r\n    \"xLargeBags\": 3680.23,\r\n    \"type\": \"organic\",\r\n    \"year\": 2024,\r\n    \"region\": \"California\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/rest",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"rest"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Avocado Sale",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"date\": \"2024-11-02\",\r\n    \"averagePrice\": 30.00,\r\n    \"totalVolume\": 1500.00\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/rest/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"rest",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Aggregate Average Price By Region",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/rest/average-price-by-region",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"rest",
+								"average-price-by-region"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Avocado Sale",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/rest/33",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"rest",
+								"33"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "GraphQL",
+			"item": [
+				{
+					"name": "Retrieve All Avocado Sales",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "{\r\n  getAllAvocadoSales {\r\n        id\r\n        date\r\n        averagePrice\r\n        totalVolume\r\n        plu4046\r\n        plu4225\r\n        plu4770\r\n        totalBags\r\n        smallBags\r\n        largeBags\r\n        xLargeBags\r\n        type\r\n        year\r\n        region\r\n  }\r\n}\r\n",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve Avocado Sale By ID",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "{\r\n  getAvocadoSaleById(id: 3) {\r\n    id\r\n    date\r\n    averagePrice\r\n    totalVolume\r\n    plu4046\r\n    plu4225\r\n    plu4770\r\n    totalBags\r\n    smallBags\r\n    largeBags\r\n    xLargeBags\r\n    type\r\n    year\r\n    region\r\n  }\r\n}\r\n",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve Avocado Sales By Type",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query {\r\n  getAvocadoSalesByType(type: \"conventional\") {\r\n    id\r\n    date\r\n    averagePrice\r\n    totalVolume\r\n    plu4046\r\n    plu4225\r\n    plu4770\r\n    totalBags\r\n    smallBags\r\n    largeBags\r\n    xLargeBags\r\n    type\r\n    year\r\n    region\r\n  }\r\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve Avocado Sales In Price Range",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query {\r\n  getAvocadoSalesByPriceRange(minPrice: 1.0, maxPrice: 2.5) {\r\n    id\r\n    date\r\n    averagePrice\r\n    totalVolume\r\n    plu4046\r\n    plu4225\r\n    plu4770\r\n    totalBags\r\n    smallBags\r\n    largeBags\r\n    xLargeBags\r\n    type\r\n    year\r\n    region\r\n  }\r\n}\r\n",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Avocado Sale",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation {\r\n  createAvocadoSale(\r\n    id:\"\"\r\n    date: \"2024-11-19\"\r\n    averagePrice: 3.50\r\n    totalVolume: 1000.00\r\n    plu4046: 30.4\r\n    plu4225: 28.6\r\n    plu4770: 51.8\r\n    totalBags: 8200.08\r\n    smallBags: 500.50\r\n    largeBags: 100.00\r\n    xLargeBags: 3680.23\r\n    type: \"organic\"\r\n    year: 2024\r\n    region: \"California\"\r\n  ) {\r\n    id\r\n    date\r\n    averagePrice\r\n    totalVolume\r\n    plu4046\r\n    plu4225\r\n    plu4770\r\n    totalBags\r\n    smallBags\r\n    largeBags\r\n    xLargeBags\r\n    type\r\n    year\r\n    region\r\n  }\r\n}\r\n",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Avocado Sale",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation {\r\n  updateAvocadoSale(id: 1, updates: {date: \"2024-11-04\", averagePrice: 22.5, totalVolume: 1500}) {\r\n    id\r\n    date\r\n    averagePrice\r\n    totalVolume\r\n    plu4046\r\n    plu4225\r\n    plu4770\r\n    totalBags\r\n    smallBags\r\n    largeBags\r\n    xLargeBags\r\n    type\r\n    year\r\n    region\r\n  }\r\n}\r\n",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Aggregate Average Price By Region",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query {\r\n  calculateAveragePriceByRegion {\r\n    region\r\n    averagePrice\r\n  }\r\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Avocado Sale",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation {\r\n  deleteAvocadoSale(\r\n    id: 9998\r\n  ) \r\n}\r\n",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SOAP",
+			"item": [
+				{
+					"name": "Retrieve All Avocado Sales",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:web=\"http://soap.api.avocado_api.tiashack.unb.edu/\">\r\n   <soapenv:Header/>\r\n   <soapenv:Body>\r\n      <web:getAllAvocadoSales/>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>\r\n",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/soap",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"soap"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve Avocado Sale By ID",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:web=\"http://soap.api.avocado_api.tiashack.unb.edu/\">\r\n   <soapenv:Header/>\r\n   <soapenv:Body>\r\n        <web:getAvocadoSaleById>\r\n            <id>3</id>\r\n        </web:getAvocadoSaleById>   \r\n    </soapenv:Body>\r\n</soapenv:Envelope>\r\n",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/soap",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"soap"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve Avocado Sales By Type",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:web=\"http://soap.api.avocado_api.tiashack.unb.edu/\">\r\n   <soapenv:Header/>\r\n   <soapenv:Body>\r\n        <web:getAvocadoSalesByType>\r\n            <type>conventional</type>\r\n        </web:getAvocadoSalesByType>   \r\n    </soapenv:Body>\r\n</soapenv:Envelope>\r\n",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/soap",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"soap"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve Avocado Sales In Price Range",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:web=\"http://soap.api.avocado_api.tiashack.unb.edu/\">\r\n   <soapenv:Header/>\r\n   <soapenv:Body>\r\n        <web:getAvocadoSalesByPriceRange>\r\n            <minPrice>1.0</minPrice>\r\n            <maxPrice>2.5</maxPrice>\r\n        </web:getAvocadoSalesByPriceRange>   \r\n    </soapenv:Body>\r\n</soapenv:Envelope>\r\n",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/soap",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"soap"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Avocado Sale",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n                  xmlns:web=\"http://soap.api.avocado_api.tiashack.unb.edu/\">\r\n   <soapenv:Header/>\r\n   <soapenv:Body>\r\n      <web:createAvocadoSale>\r\n         <avocadoSale>\r\n            <date>2024-11-19</date>\r\n            <averagePrice>3.50</averagePrice>\r\n            <totalVolume>1000.0</totalVolume>\r\n            <plu4046>30.4</plu4046>\r\n            <plu4225>28.6</plu4225>\r\n            <plu4770>51.8</plu4770>\r\n            <totalBags>8200.08</totalBags>\r\n            <smallBags>500.50</smallBags>\r\n            <largeBags>100.00</largeBags>\r\n            <XLargeBags>3680.23</XLargeBags>\r\n            <type>organic</type>\r\n            <year>2024</year>\r\n            <region>California</region>\r\n         </avocadoSale>\r\n      </web:createAvocadoSale>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>\r\n",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/soap",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"soap"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Avocado Sale",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n                  xmlns:web=\"http://soap.api.avocado_api.tiashack.unb.edu/\"\r\n                  xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\r\n                  xmlns:xs=\"http://www.w3.org/2001/XMLSchema\">\r\n   <soapenv:Header/>\r\n   <soapenv:Body>\r\n      <web:updateAvocadoSale>\r\n        <id>1</id>\r\n         <updates>\r\n            <entry>\r\n                <key>date</key>\r\n                <value xsi:type=\"xs:string\">2024-11-10</value>\r\n            </entry>\r\n            <entry>\r\n                <key>averagePrice</key>\r\n                <value xsi:type=\"xs:double\">20.00</value>\r\n            </entry>\r\n            <entry>\r\n                <key>totalVolume</key>\r\n                <value xsi:type=\"xs:double\">1920.98</value>\r\n            </entry>\r\n         </updates>\r\n      </web:updateAvocadoSale>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>\r\n",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/soap",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"soap"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Aggregate Average Price By Region",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n                  xmlns:web=\"http://soap.api.avocado_api.tiashack.unb.edu/\"\r\n                  xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\r\n                  xmlns:xs=\"http://www.w3.org/2001/XMLSchema\">\r\n   <soapenv:Header/>\r\n   <soapenv:Body>\r\n      <web:calculateAveragePriceByRegion />\r\n   </soapenv:Body>\r\n</soapenv:Envelope>\r\n",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/soap",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"soap"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Avocado Sale",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n                  xmlns:web=\"http://soap.api.avocado_api.tiashack.unb.edu/\">\r\n   <soapenv:Header/>\r\n   <soapenv:Body>\r\n      <web:deleteAvocadoSale>\r\n        <id>34</id>\r\n      </web:deleteAvocadoSale>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>\r\n",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/soap",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"soap"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
