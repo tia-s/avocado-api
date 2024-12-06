@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "995c0e0e-e0ff-4062-b605-3e676fcc3316",
+		"_postman_id": "f1ffa61f-92ad-4c35-b516-fd8242336b80",
 		"name": "Avocado API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "479652"
+		"_exporter_id": "31189146"
 	},
 	"item": [
 		{
@@ -110,7 +110,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"date\": \"2024-11-19\",\r\n    \"averagePrice\": 3.50,\r\n    \"totalVolume\": 1000.00,\r\n    \"plu4046\": 30.4,\r\n    \"plu4225\": 28.6,\r\n    \"plu4770\": 51.8,\r\n    \"totalBags\": 8200.00,\r\n    \"smallBags\": 500.50,\r\n    \"largeBags\": 100.00,\r\n    \"xLargeBags\": 3680.23,\r\n    \"type\": \"organic\",\r\n    \"year\": 2024,\r\n    \"region\": \"California\"\r\n}\r\n",
+							"raw": "{\r\n    \"id\": 9997,\r\n    \"date\": \"2024-11-19\",\r\n    \"averagePrice\": 3.50,\r\n    \"totalVolume\": 1000.00,\r\n    \"plu4046\": 30.4,\r\n    \"plu4225\": 28.6,\r\n    \"plu4770\": 51.8,\r\n    \"totalBags\": 8200.00,\r\n    \"smallBags\": 500.50,\r\n    \"largeBags\": 100.00,\r\n    \"xLargeBags\": 3680.23,\r\n    \"type\": \"organic\",\r\n    \"year\": 2024,\r\n    \"region\": \"California\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -139,7 +139,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"date\": \"2024-11-02\",\r\n    \"averagePrice\": 30.00,\r\n    \"totalVolume\": 1500.00\r\n}",
+							"raw": "{\r\n    \"date\": \"2024-11-01\",\r\n    \"averagePrice\": 30.00,\r\n    \"totalVolume\": 1500.00\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -147,7 +147,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/rest/1",
+							"raw": "http://localhost:8080/api/rest/9997",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -156,7 +156,7 @@
 							"path": [
 								"api",
 								"rest",
-								"1"
+								"9997"
 							]
 						}
 					},
@@ -189,7 +189,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/rest/33",
+							"raw": "http://localhost:8080/api/rest/9997",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -198,7 +198,7 @@
 							"path": [
 								"api",
 								"rest",
-								"33"
+								"9997"
 							]
 						}
 					},
@@ -325,7 +325,7 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "mutation {\r\n  createAvocadoSale(\r\n    id:\"\"\r\n    date: \"2024-11-19\"\r\n    averagePrice: 3.50\r\n    totalVolume: 1000.00\r\n    plu4046: 30.4\r\n    plu4225: 28.6\r\n    plu4770: 51.8\r\n    totalBags: 8200.08\r\n    smallBags: 500.50\r\n    largeBags: 100.00\r\n    xLargeBags: 3680.23\r\n    type: \"organic\"\r\n    year: 2024\r\n    region: \"California\"\r\n  ) {\r\n    id\r\n    date\r\n    averagePrice\r\n    totalVolume\r\n    plu4046\r\n    plu4225\r\n    plu4770\r\n    totalBags\r\n    smallBags\r\n    largeBags\r\n    xLargeBags\r\n    type\r\n    year\r\n    region\r\n  }\r\n}\r\n",
+								"query": "mutation {\r\n  createAvocadoSale(\r\n    id: 9998\r\n    date: \"2024-11-19\"\r\n    averagePrice: 3.50\r\n    totalVolume: 1000.00\r\n    plu4046: 30.4\r\n    plu4225: 28.6\r\n    plu4770: 51.8\r\n    totalBags: 8200.08\r\n    smallBags: 500.50\r\n    largeBags: 100.00\r\n    xLargeBags: 3680.23\r\n    type: \"organic\"\r\n    year: 2024\r\n    region: \"California\"\r\n  ) {\r\n    id\r\n    date\r\n    averagePrice\r\n    totalVolume\r\n    plu4046\r\n    plu4225\r\n    plu4770\r\n    totalBags\r\n    smallBags\r\n    largeBags\r\n    xLargeBags\r\n    type\r\n    year\r\n    region\r\n  }\r\n}\r\n",
 								"variables": ""
 							}
 						},
@@ -352,7 +352,7 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "mutation {\r\n  updateAvocadoSale(id: 1, updates: {date: \"2024-11-04\", averagePrice: 22.5, totalVolume: 1500}) {\r\n    id\r\n    date\r\n    averagePrice\r\n    totalVolume\r\n    plu4046\r\n    plu4225\r\n    plu4770\r\n    totalBags\r\n    smallBags\r\n    largeBags\r\n    xLargeBags\r\n    type\r\n    year\r\n    region\r\n  }\r\n}\r\n",
+								"query": "mutation {\r\n  updateAvocadoSale(id: 9998, updates: {date: \"2024-11-04\", averagePrice: 22.5, totalVolume: 1500}) {\r\n    id\r\n    date\r\n    averagePrice\r\n    totalVolume\r\n    plu4046\r\n    plu4225\r\n    plu4770\r\n    totalBags\r\n    smallBags\r\n    largeBags\r\n    xLargeBags\r\n    type\r\n    year\r\n    region\r\n  }\r\n}\r\n",
 								"variables": ""
 							}
 						},
@@ -583,7 +583,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n                  xmlns:web=\"http://soap.api.avocado_api.tiashack.unb.edu/\">\r\n   <soapenv:Header/>\r\n   <soapenv:Body>\r\n      <web:createAvocadoSale>\r\n         <avocadoSale>\r\n            <date>2024-11-19</date>\r\n            <averagePrice>3.50</averagePrice>\r\n            <totalVolume>1000.0</totalVolume>\r\n            <plu4046>30.4</plu4046>\r\n            <plu4225>28.6</plu4225>\r\n            <plu4770>51.8</plu4770>\r\n            <totalBags>8200.08</totalBags>\r\n            <smallBags>500.50</smallBags>\r\n            <largeBags>100.00</largeBags>\r\n            <XLargeBags>3680.23</XLargeBags>\r\n            <type>organic</type>\r\n            <year>2024</year>\r\n            <region>California</region>\r\n         </avocadoSale>\r\n      </web:createAvocadoSale>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>\r\n",
+							"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n                  xmlns:web=\"http://soap.api.avocado_api.tiashack.unb.edu/\">\r\n   <soapenv:Header/>\r\n   <soapenv:Body>\r\n      <web:createAvocadoSale>\r\n         <avocadoSale>\r\n            <id>9999</id>\r\n            <date>2024-11-19</date>\r\n            <averagePrice>3.50</averagePrice>\r\n            <totalVolume>1000.0</totalVolume>\r\n            <plu4046>30.4</plu4046>\r\n            <plu4225>28.6</plu4225>\r\n            <plu4770>51.8</plu4770>\r\n            <totalBags>8200.08</totalBags>\r\n            <smallBags>500.50</smallBags>\r\n            <largeBags>100.00</largeBags>\r\n            <XLargeBags>3680.23</XLargeBags>\r\n            <type>organic</type>\r\n            <year>2024</year>\r\n            <region>California</region>\r\n         </avocadoSale>\r\n      </web:createAvocadoSale>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>\r\n",
 							"options": {
 								"raw": {
 									"language": "xml"
@@ -618,7 +618,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n                  xmlns:web=\"http://soap.api.avocado_api.tiashack.unb.edu/\"\r\n                  xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\r\n                  xmlns:xs=\"http://www.w3.org/2001/XMLSchema\">\r\n   <soapenv:Header/>\r\n   <soapenv:Body>\r\n      <web:updateAvocadoSale>\r\n        <id>1</id>\r\n         <updates>\r\n            <entry>\r\n                <key>date</key>\r\n                <value xsi:type=\"xs:string\">2024-11-10</value>\r\n            </entry>\r\n            <entry>\r\n                <key>averagePrice</key>\r\n                <value xsi:type=\"xs:double\">20.00</value>\r\n            </entry>\r\n            <entry>\r\n                <key>totalVolume</key>\r\n                <value xsi:type=\"xs:double\">1920.98</value>\r\n            </entry>\r\n         </updates>\r\n      </web:updateAvocadoSale>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>\r\n",
+							"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n                  xmlns:web=\"http://soap.api.avocado_api.tiashack.unb.edu/\"\r\n                  xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\r\n                  xmlns:xs=\"http://www.w3.org/2001/XMLSchema\">\r\n   <soapenv:Header/>\r\n   <soapenv:Body>\r\n      <web:updateAvocadoSale>\r\n        <id>9999</id>\r\n         <updates>\r\n            <entry>\r\n                <key>date</key>\r\n                <value xsi:type=\"xs:string\">2024-11-09</value>\r\n            </entry>\r\n            <entry>\r\n                <key>averagePrice</key>\r\n                <value xsi:type=\"xs:double\">20.00</value>\r\n            </entry>\r\n            <entry>\r\n                <key>totalVolume</key>\r\n                <value xsi:type=\"xs:double\">1920.98</value>\r\n            </entry>\r\n         </updates>\r\n      </web:updateAvocadoSale>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>\r\n",
 							"options": {
 								"raw": {
 									"language": "xml"
@@ -688,7 +688,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n                  xmlns:web=\"http://soap.api.avocado_api.tiashack.unb.edu/\">\r\n   <soapenv:Header/>\r\n   <soapenv:Body>\r\n      <web:deleteAvocadoSale>\r\n        <id>34</id>\r\n      </web:deleteAvocadoSale>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>\r\n",
+							"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n                  xmlns:web=\"http://soap.api.avocado_api.tiashack.unb.edu/\">\r\n   <soapenv:Header/>\r\n   <soapenv:Body>\r\n      <web:deleteAvocadoSale>\r\n        <id>9999</id>\r\n      </web:deleteAvocadoSale>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>\r\n",
 							"options": {
 								"raw": {
 									"language": "xml"
