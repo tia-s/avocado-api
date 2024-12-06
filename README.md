@@ -109,7 +109,7 @@ The methods defined in the service class are:
 - **Returns**: None.
 
 ## Importing Data  
-To populate the database with avocado sales data from a CSV file, use the following SQL command:  
+To populate the database with avocado sales data from the CSV file in the ```assets``` folder, use the following SQL command:  
 ```sql
 \copy avocado_sales(ID, Date, AveragePrice, TotalVolume, PLU4046, PLU4225, PLU4770, TotalBags, SmallBags, LargeBags, XLargeBags, Type, Year, Region) 
 FROM '<path-to-csv>' 
@@ -129,7 +129,7 @@ Follow these steps to start the Avocado API application:
     ```bash
     cd avocado-api
     ```
-3. Download the avocado.csv file from this repository
+3. Download the avocado.csv file from the ```assets``` folder
 
 4. Create a PostgreSQL database and the avocado_sales table populated with data from avocado.csv:
 
@@ -158,7 +158,7 @@ Follow these steps to start the Avocado API application:
 
 ## Running the Functional API Tests
 
-1. Download the Avocado API Postman Collection from this repository.
+1. Download the Avocado API Postman Collection from the ```assets``` folder.
 
 2. Import the collection into Postman.
 
@@ -168,7 +168,7 @@ Follow these steps to start the Avocado API application:
 
 2. Run Apache JMeter by navigating to its bin folder and running server.bat
 
-3. Download the Avocado API Test Plan from this repository (avocado_api_jmeter_test_plan.jmx)
+3. Download the Avocado API Test Plan (avocado_api_jmeter_test_plan.jmx) from the ```assets``` folder 
 
 4. Open the test plan in Apache JMeter
 
